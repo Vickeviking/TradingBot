@@ -1,0 +1,126 @@
+"" TODO SECTION ""
+
+- Write Documentation on system structure           Done [X]
+- Write Documentation on controll modules             Done [X]
+info : System modules owned by System class owned by rootView
+- start working on independent system modules       Done [ ]
+    -system class (owned by rootView)               Done [ ]
+        - Trade_bot ()                              Done [ ]
+            - Wallet                                Done [ ]
+                - Bought_stocks                     Done [ ]
+            - Market_signals_logic                  Done [ ]
+            - Settings                              Done [ ]
+        - Market                                    Done [ ]
+            - stock                                 Done [ ]
+                - stock_history                     Done [ ]
+            - fetch_data                            Done [ ]
+
+info : Controllers owned by rootView                     
+- start working on controllers                      Done [ ]
+    - bot_dialoge_controller                        Done [ ]
+        - bot_dialoge_view                          Done [ ]
+        - bot_dialoge_model                         Done [ ]
+    - bot_graph_controller                          Done [ ]
+        - bot_graph_view                            Done [ ]
+        - bot_graph_model                           Done [ ]
+    - bot_settings_controller                       Done [ ]    ptr to tradebot settings to update on systemclock
+        - bot_settings_view                         Done [ ]
+        - bot_settings_model                        Done [ ]
+    - live_stocks_controller                        Done [ ]
+        - live_stocks_view                          Done [ ]
+        - live_stocks_model                         Done [ ]
+            - live_stock_controller                 Done [ ]
+                - live_stock_view                   Done [ ]
+                - live_stock_model                  Done [ ]
+
+
+""Documentation""
+info: follows TODO order:
+
+The system has a core function update() that acts like a system clock,
+it will update system class & all controllers, which all will update their children
+DONT update ptrs while they will be updated by their owner, each module only has ONE owner 
+
+
+-system class (owned by rootView)
+    owns -trade_bot(needs systemclock), -market (needs systemclock)
+    *[X]*  onUpdate, it will update all the system modules if that need a system clock or have childrens that need a system clock
+-controllerContainer (owned by rootView)
+    owns -bot_dialoge_controller, -bot_graph_controller, -bot_settings_controller, -live_stocks_controller
+    *[X]*  onUpdate, it will update all the controllers if they need a system clock or have childrens that need a system clock
+-Trade_bot (owned by system class), (needs systemclock)
+    owns -wallet(needs systemclock), -market_signals_logic(need systemclock, ?settings ), -settings 
+    ptr to ?market to give market_signals_logic an instance of market
+    *[X]*  onUpdate, it will update the wallet and market_signals_logic if they need a system clock
+-Wallet (owned by Trade_bot)
+    owns -currency, -assets_worth(needs systemclock), -bought_stocks[]
+    ptr to ?market to get stock values
+    ptr Market_signals_logic to get buy/sell signals
+    functions
+        -buy_stock(?market, ?Market_signals_logic, ?Trade_bot_Settings)
+        -sell_stock(?market, ?Market_signals_logic, ?Trade_bot_Settings)
+        -update_assets_worth(?market)
+        -update_bought_stocks(quantity, stock, stockTicket, stockName, bought_price)
+    *[X]*  onUpdate, it will update the currency, assets worth and bought_stocks if they need a system clock, see if signals are on
+-Bought_stock (owned by Wallet)
+    owns a boughtStockStructure 
+         boughtstockstructure
+            -stock,-stockTicket, -stockName, -bought_price
+    owns an amount of the stock
+    *[X]*  onUpdate, it will update the list of bought_stocks if they need a system clock
+-Market_signals_logic (owned by Trade_bot)
+    owns -buysignal(needs system clock, ?Trade_bot_Settings, ?Market), sellsignal(needs systemclock)
+                owns -isSignaling 
+                ptr to? Trade_bot_Settings
+                ptr to? Market
+                functions( ?Trade_bot_Settings, ?Market):   call on update/systemclock,
+                    - evaluate_RSI(?Trade_bot_Settings, ?Market)
+                    - evaluate_PercentageDip(?Trade_bot_Settings, ?Market)
+                    - evaluate_Derivative_switch(?Trade_bot_Settings, ?Market)
+    owns -sellsignal(needs systemclock, ?Trade_bot_Settings, ?Market)
+                owns -isSignaling 
+                ptr to? Trade_bot_Settings
+                ptr to? Market
+                functions( ?Trade_bot_Settings, ?Market):   call on update/systemclock,
+                    - evaluate_Profit_Exit(?Trade_bot_Settings, ?Market)
+                    - evaluate_Loss_exit(?Trade_bot_Settings, ?Market)
+                    - evaluate_Derivative_switch(?Trade_bot_Settings, ?Market)
+    ptr to ?market to get stock values
+    ptr to ?Trade_bot settings
+- Settings (owned by Trade_bot) (meeds systemclock) *updated by bot_settings_controller 
+    owns:
+            -sell_RSI_settings *a range
+            -sell_PercentageDip_settings
+            -sell_Derivative_switch_settings
+                -isOn
+                -Steps
+            -sell_Profit_Exit_settings 
+            -sell_Loss_exit_settings
+            -sell_Derivative_switch_settings
+                -isOn
+                -Steps
+            - quantity_setting
+    *[X]*  onUpdate, it will update the Trade_bot_Settings if they need a system clock
+-Market (owned by system class) (needs systemclock)
+    owns -stocks[] *all stocks , update each systemclock
+    owns fetch_data(need system clock) *fetches data from api
+    *[X]*  onUpdate, it will update the list of stocks if they need a system clock
+-stock (owned by Market)
+    owns -stock_history[] *all stock history, update each systemclock
+    owns -stockTicket, -stockName, -stockValue, -stockValueChange, -stockValueChangePercentage
+    functions
+        -update_stock_history(?market)
+    *[X]*  onUpdate, it will update the stock history if they need a system clock
+    -stock_history (owned by stock)
+        List of stockHistoryStructure
+        stockHistoryStructure
+            -stockValue, -stockValueChange, -stockValueChangePercentage
+-fetch_data(ptr to market) (owned by Market) (needs systemclock)
+    owns -TimeOfDay, -stocks to fetch
+    functions
+        -fetch_stock_data(?market)
+    *[X]*  onUpdate, it will update the list of stocks if they need a system clock
+
+
+Controllers owned by rootView
+            
