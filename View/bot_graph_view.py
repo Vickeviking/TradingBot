@@ -1,8 +1,10 @@
 from tkinter import LabelFrame
 
 class bot_graph_veiw(LabelFrame):
-    def __init__(self, master=None, text="Graph", bg="blue"):
+    def __init__(self, master=None,controller=None, text=None, bg="blue"):
         super().__init__(master, text=text, bg=bg)
         self.master = master
+        self.controller = controller
+        self.configure(border=0, borderwidth=0)
 
     # Add any additional methods or configurations as needed
