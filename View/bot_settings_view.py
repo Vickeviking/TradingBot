@@ -8,3 +8,4 @@ class bot_settings_veiw(LabelFrame):
         self.configure(border= 0, borderwidth=0)
 
     # Add any additional methods or configurations as needed
+    
