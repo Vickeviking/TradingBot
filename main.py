@@ -31,9 +31,13 @@ class MyApp:
             ControllerTypes.LIVE_STOCKS: live_stocks_controller(self.app)
         }
         bot_dialoge_frame = self.controllers[ControllerTypes.BOT_DIALOGUE].get_label_frame()
+        bot_dialoge_frame.pack_propagate(0)
         bot_graph_frame = self.controllers[ControllerTypes.BOT_GRAPH].get_label_frame()
+        bot_graph_frame.pack_propagate(0)
         bot_settings_frame = self.controllers[ControllerTypes.BOT_SETTINGS].get_label_frame()
+        bot_settings_frame.pack_propagate(0)
         live_stocks_frame = self.controllers[ControllerTypes.LIVE_STOCKS].get_label_frame()
+        live_stocks_frame.pack_propagate(0)
         
         # Displaying in frame
         bot_dialoge_frame.grid(row=0, column=0, sticky="nsew")
