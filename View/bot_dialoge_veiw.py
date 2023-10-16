@@ -21,6 +21,7 @@ class bot_dialoge_view_dialoge(LabelFrame):
         super().__init__(master, text=text, bg=bg)
         self.master = master
         self.controller = controller
+        
 class bot_dialoge_veiw(LabelFrame):
     def __init__(self, master=None,controller=None, text=None, bg="white"):
         super().__init__(master, text=text, bg=bg)
