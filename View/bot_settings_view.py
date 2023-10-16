@@ -65,18 +65,22 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.nasdaq_header = Label(self.bottomHeaderFrameNasdaq, text="Nasdaq", bg=cp.clayred, fg="white", font=self.roboto16)
         self.nasdaq_opening_hours = Label(self.bottomHeaderFrameNasdaq, text="15:30-22:00", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_tesla = Label(self.nasdaqstockFrame1, text="tesla", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.nasdaq_tesla_radio = Radiobutton(self.nasdaqstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14)
+        self.nasdaq_tesla_radio_var = IntVar()
+        self.nasdaq_tesla_radio = Radiobutton(self.nasdaqstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_tesla_radio_var, value=1)
         self.nasdaq_apple = Label(self.nasdaqstockFrame2, text="apple", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.nasdaq_apple_radio = Radiobutton(self.nasdaqstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14)
+        self.nasdaq_apple_radio_var = IntVar()
+        self.nasdaq_apple_radio = Radiobutton(self.nasdaqstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_apple_radio_var, value=2)
         self.nasdaq_nvidia = Label(self.nasdaqstockFrame3, text="nvidia", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.nasdaq_nvidia_radio = Radiobutton(self.nasdaqstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14)
+        self.nasdaq_nvidia_radio_var = IntVar()
+        self.nasdaq_nvidia_radio = Radiobutton(self.nasdaqstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_nvidia_radio_var, value=3)
         self.nasdaq_amazon = Label(self.nasdaqstockFrame4, text="amazon", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.nasdaq_amazon_radio = Radiobutton(self.nasdaqstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14)
+        self.nasdaq_amazon_radio_var = IntVar()
+        self.nasdaq_amazon_radio = Radiobutton(self.nasdaqstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_amazon_radio_var, value=4)
         #pack nasdaq stock pile
-        self.nasdaqstockFrame1.pack()
-        self.nasdaqstockFrame2.pack()
-        self.nasdaqstockFrame3.pack()
-        self.nasdaqstockFrame4.pack()
+        self.nasdaqstockFrame1.pack(anchor="e")
+        self.nasdaqstockFrame2.pack(anchor="e")
+        self.nasdaqstockFrame3.pack(anchor="e")
+        self.nasdaqstockFrame4.pack(anchor="e")
         # pack
         self.nasdaq_header.pack()
         self.nasdaq_opening_hours.pack()
@@ -96,18 +100,22 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.sthlm_header = Label(self.bottomHeaderFrameSthlm, text="Stockholm", bg=cp.clayred, fg="white", font=self.roboto16)
         self.sthlm_opening_hours = Label(self.bottomHeaderFrameSthlm, text="09:00-17:30", bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_astrazeneca = Label(self.sthlmstockFrame1, text="AstraZeneca", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_astrazeneca_radio = Radiobutton(self.sthlmstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14)
+        self.sthlm_astrazeneca_radio_var = IntVar()
+        self.sthlm_astrazeneca_radio = Radiobutton(self.sthlmstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_astrazeneca_radio_var, value=1)
         self.sthlm_investorab = Label(self.sthlmstockFrame2, text="InvestorAB", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_investorab_radio = Radiobutton(self.sthlmstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14)
+        self.sthlm_investorab_radio_var = IntVar()
+        self.sthlm_investorab_radio = Radiobutton(self.sthlmstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_investorab_radio_var, value=2)
         self.sthlm_abb = Label(self.sthlmstockFrame3, text="abb", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_abb_radio = Radiobutton(self.sthlmstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14)
+        self.sthlm_abb_radio_var = IntVar()
+        self.sthlm_abb_radio = Radiobutton(self.sthlmstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_abb_radio_var, value=3)
         self.sthlm_atlascopco = Label(self.sthlmstockFrame4, text="atlas copco", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_atlascopco_radio = Radiobutton(self.sthlmstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14)
+        self.sthlm_atlascopco_radio_var = IntVar()
+        self.sthlm_atlascopco_radio = Radiobutton(self.sthlmstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_atlascopco_radio_var, value=4)
         #pack sthlm stock pile
-        self.sthlmstockFrame1.pack()
-        self.sthlmstockFrame2.pack()
-        self.sthlmstockFrame3.pack()
-        self.sthlmstockFrame4.pack()
+        self.sthlmstockFrame1.pack(anchor="e")
+        self.sthlmstockFrame2.pack(anchor="e")
+        self.sthlmstockFrame3.pack(anchor="e")
+        self.sthlmstockFrame4.pack(anchor= "e")
         # pack
         self.sthlm_header.pack()
         self.sthlm_opening_hours.pack()
@@ -266,7 +274,7 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #left layer 3
         self.layerl3_1_label = Label(self.layerl3_1, text="Procentage dip", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerl3_1_label.pack()
-        self.layerl3_2_slider = Scale(self.layerl3_2, from_=0, to=100, bg=cp.clayred, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
+        self.layerl3_2_slider = Scale(self.layerl3_2, from_=0, to=100, bg=cp.smoothblack, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
         self.layerl3_2_slider.pack(side="left")
         self.layerl3_2_label = Label(self.layerl3_2, text="0%", bg=cp.clayred, fg="white", font=self.roboto20)
         self.layerl3_2_label.pack(side="left")
@@ -282,7 +290,7 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #left layer 5
         self.layerl5_1_label = Label(self.layerl5_1, text="Quantity at a time", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerl5_1_label.pack()
-        self.layerl5_2_slider = Scale(self.layerl5_2, from_=0, to=100, bg=cp.clayred, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
+        self.layerl5_2_slider = Scale(self.layerl5_2, from_=0, to=100, bg=cp.smoothblack, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
         self.layerl5_2_slider.pack(side="left")
         self.layerl5_2_label = Label(self.layerl5_2, text="0%", bg=cp.clayred, fg="white", font=self.roboto20)
         self.layerl5_2_label.pack(side="left")
@@ -293,14 +301,14 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #right layer 2
         self.layerr2_1_label = Label(self.layerr2_1, text="Profit exit", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerr2_1_label.pack()
-        self.layerr2_2_slider = Scale(self.layerr2_2, from_=0, to=100, bg=cp.clayred, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
+        self.layerr2_2_slider = Scale(self.layerr2_2, from_=0, to=100, bg=cp.smoothblack, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
         self.layerr2_2_slider.pack(side="left")
         self.layerr2_2_label = Label(self.layerr2_2, text="0%", bg=cp.clayred, fg="white", font=self.roboto20)
         self.layerr2_2_label.pack(side="left")
         #right layer 3
         self.layerr3_1_label = Label(self.layerr3_1, text="Loss exit", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerr3_1_label.pack()
-        self.layerr3_2_slider = Scale(self.layerr3_2, from_=0, to=100, bg=cp.clayred, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
+        self.layerr3_2_slider = Scale(self.layerr3_2, from_=0, to=100, bg=cp.smoothblack, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
         self.layerr3_2_slider.pack(side="left")
         self.layerr3_2_label = Label(self.layerr3_2, text="0%", bg=cp.clayred, fg="white", font=self.roboto20)
         self.layerr3_2_label.pack(side="left")
@@ -313,13 +321,6 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         self.layerr4_2_label2.pack(side="left")
         self.layerr4_2_numberinput = Entry(self.layerr4_2, bg="white", fg="black", font=self.roboto14, width=1)
         self.layerr4_2_numberinput.pack(side="left")
-
-
-
-
-
-
-
 
 class bot_settings_view_settings_panel(LabelFrame):
     def __init__(self, master=None,controller=None, text=None, bg=cp.clayred):
