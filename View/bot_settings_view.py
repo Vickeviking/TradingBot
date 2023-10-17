@@ -353,6 +353,9 @@ class bot_settings_view_finalize(LabelFrame):
         self.master = master
         self.controller = controller
         self.configure(border=0, borderwidth=0)
+        self.pack_propagate(0)
+        
+        # add  (startbalance label , entry ), save settings btn, reset settings btn, start bot btn, reset bot btn
 
 
 class bot_settings_veiw(LabelFrame):

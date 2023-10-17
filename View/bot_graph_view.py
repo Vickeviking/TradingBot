@@ -43,6 +43,7 @@ class bot_graph_view_graph(LabelFrame):
         self.ax_graph.xaxis.set_major_formatter(mp.ticker.NullFormatter())
         self.canvas_graph = FigureCanvasTkAgg(self.fig_graph, master=self)
         self.canvas_graph.get_tk_widget().pack()
+        
 class bot_graph_view_info(LabelFrame):
     def __init__(self, master=None, controller=None, text=None, bg=cp.clayred):
         super().__init__(master, text=text, bg=bg)
