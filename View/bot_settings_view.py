@@ -74,10 +74,10 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.nasdaq_amazon = Label(self.nasdaqstockFrame4, text="amazon", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_amazon_radio = Radiobutton(self.nasdaqstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14)
         #pack nasdaq stock pile
-        self.nasdaqstockFrame1.pack()
-        self.nasdaqstockFrame2.pack()
-        self.nasdaqstockFrame3.pack()
-        self.nasdaqstockFrame4.pack()
+        self.nasdaqstockFrame1.pack(anchor="e")
+        self.nasdaqstockFrame2.pack(anchor="e")
+        self.nasdaqstockFrame3.pack(anchor="e")
+        self.nasdaqstockFrame4.pack(anchor="e")
         # pack
         self.nasdaq_header.pack()
         self.nasdaq_opening_hours.pack()
@@ -105,10 +105,10 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.sthlm_atlascopco = Label(self.sthlmstockFrame4, text="atlas copco", bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_atlascopco_radio = Radiobutton(self.sthlmstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14)
         #pack sthlm stock pile
-        self.sthlmstockFrame1.pack()
-        self.sthlmstockFrame2.pack()
-        self.sthlmstockFrame3.pack()
-        self.sthlmstockFrame4.pack()
+        self.sthlmstockFrame1.pack(anchor="e")
+        self.sthlmstockFrame2.pack(anchor="e")
+        self.sthlmstockFrame3.pack(anchor="e")
+        self.sthlmstockFrame4.pack(anchor="e")
         # pack
         self.sthlm_header.pack()
         self.sthlm_opening_hours.pack()

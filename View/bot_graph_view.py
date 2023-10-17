@@ -13,10 +13,16 @@ class bot_graph_view_header(LabelFrame):
         self.master = master
         self.controller = controller
         self.configure(border=0,borderwidth=0)
+        self.pack_propagate(0)
         self.roboto22 = tkFont.Font(family="Roboto", size=22, weight="normal")
+        #padding label
+        self.padding = tk.Frame(self, bg=cp.clayred, height=10)
+        self.padding.pack(side="top")
         # Create a label 
         self.stock_name_label = tk.Label(self, text="Bot Liquidation Graph ", font=self.roboto22, fg="white", bg=cp.clayred, height=3)
-        self.stock_name_label.pack(anchor="center", fill="both", expand=True)
+        self.stock_name_label.pack(anchor="center", fill="both", expand=True, padx=0, pady=0, side="top")
+
+        
 
 class bot_graph_view_graph(LabelFrame):
     def __init__(self, master=None, controller=None, text=None, bg=cp.clayred):
@@ -24,6 +30,7 @@ class bot_graph_view_graph(LabelFrame):
         self.master = master
         self.controller = controller
         self.configure(border=0,borderwidth=0)
+        self.pack_propagate(0)
         #create stock graph
         self.graph_width = 2
         self.graph_height = 2
@@ -38,11 +45,12 @@ class bot_graph_view_graph(LabelFrame):
         self.ax_graph.tick_params(axis="x", colors="white")
         self.ax_graph.tick_params(axis="y", colors="white")
 
+
         #plot 5 numbers 
         self.ax_graph.plot([1,2,3,4,5], [0.1,0.12,0.13,0.11,0.14])
         self.ax_graph.xaxis.set_major_formatter(mp.ticker.NullFormatter())
         self.canvas_graph = FigureCanvasTkAgg(self.fig_graph, master=self)
-        self.canvas_graph.get_tk_widget().pack()
+        self.canvas_graph.get_tk_widget().pack(side="top")
         
 class bot_graph_view_info(LabelFrame):
     def __init__(self, master=None, controller=None, text=None, bg=cp.clayred):
@@ -50,9 +58,19 @@ class bot_graph_view_info(LabelFrame):
         self.master = master
         self.controller = controller
         self.configure(border=0,borderwidth=0)
+        self.pack_propagate(0)
+        self.roboto22 = tkFont.Font(family="Roboto", size=22, weight="normal")
+        self.padding = tk.Frame(self, bg=cp.clayred, height=3)
+        self.padding.pack(side="top")
+        self.live_balance_label = tk.Label(self, text="Live Balance: 1000$", font=self.roboto22, fg="white", bg=cp.clayred, height=1)
+        self.live_balance_label.pack(side="top", anchor="w", padx = 30)
+        self.liquidation_value_label = tk.Label(self, text="Liquidation Value: 1200$", font=self.roboto22, fg="white", bg=cp.clayred, height=1)
+        self.liquidation_value_label.pack(side="top", anchor="w", padx=30)   
+        self.percentage_label = tk.Label(self, text="+20%", font=self.roboto22, fg="green", bg=cp.clayred, height=1)
+        self.percentage_label.pack(side="top", anchor="w", padx=30)
 
 class bot_graph_view_container(LabelFrame):
-    def __init__(self, master=None,controller=None, text=None, bg=cp.smoothblack):
+    def __init__(self, master=None,controller=None, text=None, bg=cp.clayred):
             super().__init__(master, text=text, bg=bg)
             self.master = master
             self.controller = controller
@@ -60,7 +78,7 @@ class bot_graph_view_container(LabelFrame):
             self.grid_columnconfigure(0, weight=1)
             self.grid_rowconfigure(0, weight=64)
             self.grid_rowconfigure(1, weight=198)
-            self.grid_rowconfigure(2, weight=139)
+            self.grid_rowconfigure(2, weight=100)
             self.pack_propagate(0)
             #create instance of frame 
             self.header = bot_graph_view_header(self, self.controller)
@@ -69,7 +87,7 @@ class bot_graph_view_container(LabelFrame):
             self.info = bot_graph_view_info(self, self.controller)
             # pack each frame in the grid
             self.header.grid(row=0, column=0, sticky="nsew", padx=0, pady=0)
-            self.graph.grid(row=1, column=0, sticky="nsew", padx=0, pady=0)
+            self.graph.grid(row=1, column=0, sticky="nsew", padx=5, pady=0)
             self.info.grid(row=2, column=0, sticky="nsew", padx=0, pady=0)
 
 class bot_graph_view_border(LabelFrame):
