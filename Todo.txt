@@ -21,16 +21,16 @@ info : Controllers owned by rootView
         - bot_dialoge_view                          Done [ ]
         - bot_dialoge_model                         Done [ ]
     - bot_graph_controller                          Done [ ]
-        - bot_graph_view                            Done [ ]
+        - bot_graph_view                            Done [X]
         - bot_graph_model                           Done [ ]
     - bot_settings_controller                       Done [ ]    ptr to tradebot settings to update on systemclock
-        - bot_settings_view                         Done [ ]
+        - bot_settings_view                         Done [X]
         - bot_settings_model                        Done [ ]
     - live_stocks_controller                        Done [ ]
-        - live_stocks_view                          Done [ ]
+        - live_stocks_view                          Done [X]
         - live_stocks_model                         Done [ ]
             - live_stock_controller                 Done [ ]
-                - live_stock_view                   Done [ ]
+                - live_stock_view                   Done [X]
                 - live_stock_model                  Done [ ]
 
 
