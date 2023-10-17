@@ -44,9 +44,17 @@ class MyApp:
         bot_settings_frame.grid(row=0, column=2, sticky="nsew")
         live_stocks_frame.grid(row=1, column=0, columnspan=3, sticky="nsew")
 
+        # Start the update clock
+        self.update_clock()
+
     def update_clock(self):
         # implement updates here
-        self.app.after(1000, self.update_clock)
+        self.controllers[ControllerTypes.BOT_DIALOGUE].update()
+        self.controllers[ControllerTypes.BOT_GRAPH].update()
+        self.controllers[ControllerTypes.BOT_SETTINGS].update()
+        self.controllers[ControllerTypes.LIVE_STOCKS].update()
+        self.app.after(300, self.update_clock)
+        
 
     def run(self):
         # Start the main loop

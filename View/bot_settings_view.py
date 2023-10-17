@@ -5,6 +5,7 @@ from tkinter import font as tkFont
 from tkinter import * 
 from tkmacosx import Button as macButton
 from resources.colorpalete import colorPalette as cp
+from resources.stock_enums import *
 
 class bot_settings_view_header(LabelFrame):
     def __init__(self, master=None,controller=None, text=None, bg=cp.clayred):
@@ -68,19 +69,19 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.nasdaq_tesla = Label(self.nasdaqstockFrame1, text="tesla", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_tesla_settings_radio = IntVar()
         self.nasdaq_tesla_settings_radio.set(0)
-        self.nasdaq_tesla_radio = Radiobutton(self.nasdaqstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_tesla_settings_radio, value=1)
+        self.nasdaq_tesla_radio = Radiobutton(self.nasdaqstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_tesla_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Tesla))
         self.nasdaq_apple = Label(self.nasdaqstockFrame2, text="apple", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_apple_settings_radio = IntVar()
         self.nasdaq_apple_settings_radio.set(0)
-        self.nasdaq_apple_radio = Radiobutton(self.nasdaqstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_apple_settings_radio, value=1)
+        self.nasdaq_apple_radio = Radiobutton(self.nasdaqstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_apple_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Apple))
         self.nasdaq_nvidia = Label(self.nasdaqstockFrame3, text="nvidia", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_nvidia_settings_radio = IntVar()
         self.nasdaq_nvidia_settings_radio.set(0)
-        self.nasdaq_nvidia_radio = Radiobutton(self.nasdaqstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_nvidia_settings_radio, value=1)
+        self.nasdaq_nvidia_radio = Radiobutton(self.nasdaqstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_nvidia_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Nvidia))
         self.nasdaq_amazon = Label(self.nasdaqstockFrame4, text="amazon", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_amazon_settings_radio = IntVar()
         self.nasdaq_amazon_settings_radio.set(0)
-        self.nasdaq_amazon_radio = Radiobutton(self.nasdaqstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_amazon_settings_radio, value=1)
+        self.nasdaq_amazon_radio = Radiobutton(self.nasdaqstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_amazon_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Amazon))
         #pack nasdaq stock pile
         self.nasdaqstockFrame1.pack(anchor="e")
         self.nasdaqstockFrame2.pack(anchor="e")
@@ -105,21 +106,21 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.sthlm_header = Label(self.bottomHeaderFrameSthlm, text="Stockholm", bg=cp.clayred, fg="white", font=self.roboto16)
         self.sthlm_opening_hours = Label(self.bottomHeaderFrameSthlm, text="09:00-17:30", bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_astrazeneca = Label(self.sthlmstockFrame1, text="AstraZeneca", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_astrazeneca_settrings_radio = IntVar()
-        self.sthlm_astrazeneca_settrings_radio.set(0)
-        self.sthlm_astrazeneca_radio = Radiobutton(self.sthlmstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_astrazeneca_settrings_radio, value=1)
+        self.sthlm_astrazeneca_settings_radio = IntVar()
+        self.sthlm_astrazeneca_settings_radio.set(0)
+        self.sthlm_astrazeneca_radio = Radiobutton(self.sthlmstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_astrazeneca_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Astrazeneca))
         self.sthlm_investorab = Label(self.sthlmstockFrame2, text="InvestorAB", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_investorab_radio = IntVar()
-        self.sthlm_investorab_radio.set(0)
-        self.sthlm_investorab_radio = Radiobutton(self.sthlmstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_investorab_radio, value=1)
+        self.sthlm_investorb_settings_radio = IntVar()
+        self.sthlm_investorb_settings_radio.set(0)
+        self.sthlm_investorab_radio = Radiobutton(self.sthlmstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_investorb_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Investorb))
         self.sthlm_abb = Label(self.sthlmstockFrame3, text="abb", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_abb_radio = IntVar()
-        self.sthlm_abb_radio.set(0)
-        self.sthlm_abb_radio = Radiobutton(self.sthlmstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_abb_radio, value=1)
+        self.sthlm_abb_settings_radio = IntVar()
+        self.sthlm_abb_settings_radio.set(0)
+        self.sthlm_abb_radio = Radiobutton(self.sthlmstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_abb_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.ABB))
         self.sthlm_atlascopco = Label(self.sthlmstockFrame4, text="atlas copco", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_atlascopco_radio = IntVar()
-        self.sthlm_atlascopco_radio.set(0)
-        self.sthlm_atlascopco_radio = Radiobutton(self.sthlmstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_atlascopco_radio, value=1)
+        self.sthlm_atlascopco_settings_radio = IntVar()
+        self.sthlm_atlascopco_settings_radio.set(0)
+        self.sthlm_atlascopco_radio = Radiobutton(self.sthlmstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_atlascopco_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.AtlasCopco))
         #pack sthlm stock pile
         self.sthlmstockFrame1.pack(anchor="e")
         self.sthlmstockFrame2.pack(anchor="e")
@@ -282,7 +283,7 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #left layer 4
         self.layerl4_1_label = Label(self.layerl4_1, text="Derivative Switch", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerl4_1_label.pack()
-        self.layerl4_2_button = macButton(self.layerl4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40)
+        self.layerl4_2_button = macButton(self.layerl4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40, command=lambda: self.buy_derivative_clicked())
         self.layerl4_2_button.pack(side="left")
         self.layerl4_2_label2 = Label(self.layerl4_2, text="steps", bg=cp.clayred, fg="white", font=self.roboto20, padx=5)
         self.layerl4_2_label2.pack(side="left")
@@ -316,15 +317,23 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #right layer 4
         self.layerr4_1_label = Label(self.layerr4_1, text="Derivative Switch", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerr4_1_label.pack()
-        self.layerr4_2_button = macButton(self.layerr4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40)
+        self.layerr4_2_button = macButton(self.layerr4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40, command=lambda: self.sell_derivative_clicked(), background=cp.smoothblack, border=0, borderwidth=0)
         self.layerr4_2_button.pack(side="left")
         self.layerr4_2_label2 = Label(self.layerr4_2, text="steps", bg=cp.clayred, fg="white", font=self.roboto20, padx=5)
         self.layerr4_2_label2.pack(side="left")
         self.layerr4_2_numberinput = Entry(self.layerr4_2, bg="white", fg="black", font=self.roboto14, width=1)
         self.layerr4_2_numberinput.pack(side="left")
 
-
-
+    def buy_derivative_clicked(self):
+        if self.layerl4_2_button.cget("text") == "OFF":
+            self.layerl4_2_button.configure(text="ON")
+        else :
+            self.layerl4_2_button.configure(text="OFF")
+    def sell_derivative_clicked(self):
+        if self.layerr4_2_button.cget("text") == "OFF":
+            self.layerr4_2_button.configure(text="ON")
+        else :
+            self.layerr4_2_button.configure(text="OFF")
 
 
 
@@ -370,16 +379,22 @@ class bot_settings_view_finalize(LabelFrame):
         self.padding2 = Label(self, bg=cp.clayred, width=4)
         self.save_settings_button = macButton(self, text="Save settings", bg=cp.smoothblack, fg="white", font=self.roboto18, width=140)
         self.padding3 = Label(self, bg=cp.clayred, width=2)
-        self.start_bot_button = macButton(self, text="Start bot", bg=cp.smoothblack, fg="white", font=self.roboto18, width=90)
+
+        self.start_bot_button = macButton(self, text="Start bot", bg=cp.smoothblack, fg="white", font=self.roboto18, width=90, command=lambda: self.start_bot_clicked())
 
         # add to grid
         self.padding.pack(side="left")
         self.start_balance.pack(side="left", padx=4)
-        self.start_balance_entry.pack(side="left")
+        self.start_balance_entry.pack(side="left")  
         self.padding2.pack(side="left")
         self.save_settings_button.pack(side="left")
         self.padding3.pack(side="left")
         self.start_bot_button.pack(side="left")
+    def start_bot_clicked(self):
+        if self.start_bot_button.cget("text") == "Start bot":
+            self.start_bot_button.configure(text="Stop bot")
+        else :
+            self.start_bot_button.configure(text="Start bot")
 
 
 class bot_settings_veiw(LabelFrame):
@@ -406,5 +421,77 @@ class bot_settings_veiw(LabelFrame):
         self.settings_panel.grid(row=1, column=0, columnspan=3, sticky="nsew")
         self.border.grid(row=2, column=1, sticky="nsew")
         self.finalize.grid(row=3, column=0, columnspan=3, sticky="nsew")
-    
 
+    #setters
+
+    def updateRadioBtn(self,stocks):
+        if stock_types_enum.Tesla in stocks:
+            self.settings_panel.left.nasdaq_tesla_settings_radio.set(1)
+        else:
+            self.settings_panel.left.nasdaq_tesla_settings_radio.set(0)
+        if stock_types_enum.Apple in stocks:
+            self.settings_panel.left.nasdaq_apple_settings_radio.set(1)
+        else:
+            self.settings_panel.left.nasdaq_apple_settings_radio.set(0)
+        if stock_types_enum.Nvidia in stocks:
+            self.settings_panel.left.nasdaq_nvidia_settings_radio.set(1)
+        else:
+            self.settings_panel.left.nasdaq_nvidia_settings_radio.set(0)
+        if stock_types_enum.Amazon in stocks:
+            self.settings_panel.left.nasdaq_amazon_settings_radio.set(1)
+        else:
+            self.settings_panel.left.nasdaq_amazon_settings_radio.set(0)
+        if stock_types_enum.Astrazeneca in stocks:
+            self.settings_panel.left.sthlm_astrazeneca_settings_radio.set(1)
+        else:
+            self.settings_panel.left.sthlm_astrazeneca_settings_radio.set(0)
+        if stock_types_enum.Investorb in stocks:
+            self.settings_panel.left.sthlm_investorb_settings_radio.set(1)
+        else:
+            self.settings_panel.left.sthlm_investorb_settings_radio.set(0)
+        if stock_types_enum.ABB in stocks:
+            self.settings_panel.left.sthlm_abb_settings_radio.set(1)
+        else:
+            self.settings_panel.left.sthlm_abb_settings_radio.set(0)
+        if stock_types_enum.AtlasCopco in stocks:
+            self.settings_panel.left.sthlm_atlascopco_settings_radio.set(1)
+        else:
+            self.settings_panel.left.sthlm_atlascopco_settings_radio.set(0)
+
+    def updateBuySignals(self,buy_percentage_dip, buy_quantity_at_atime):
+        # buy signals
+        self.settings_panel.right.layerl3_2_label.config(text=str(buy_percentage_dip)+"%")
+        self.settings_panel.right.layerl5_2_label.config(text=str(buy_quantity_at_atime)+"%")
+    def updateSellSignals(self, sell_percentage_profit, sell_percentage_loss):
+        # sell signals
+        self.settings_panel.right.layerr2_2_label.config(text=str(sell_percentage_profit)+"%")
+        self.settings_panel.right.layerr3_2_label.config(text=str(sell_percentage_loss)+"%")
+
+    def update(self):
+        #buy signals
+        self.controller.set_buy_lower_rsi(self.settings_panel.right.layerl2_2_numberinput1.get())
+        self.controller.set_buy_upper_rsi(self.settings_panel.right.layerl2_2_numberinput2.get())
+        self.controller.set_buy_percentage_dip(self.settings_panel.right.layerl3_2_slider.get())
+        self.controller.set_buy_derivative_steps(self.settings_panel.right.layerl4_2_numberinput.get())
+        self.controller.set_buy_quantity_at_atime(self.settings_panel.right.layerl5_2_slider.get())
+        if self.settings_panel.right.layerl4_2_button.cget("text") == "ON":
+            self.controller.set_buy_derivative_on_switch(True)
+        else :
+            self.controller.set_buy_derivative_on_switch(False)
+        #sell signals
+        self.controller.set_sell_profit_exit(self.settings_panel.right.layerr2_2_slider.get())
+        self.controller.set_sell_loss_exit(self.settings_panel.right.layerr3_2_slider.get())
+        self.controller.set_sell_derivative_steps(self.settings_panel.right.layerr4_2_numberinput.get())
+        self.controller.set_start_balance(self.finalize.start_balance_entry.get())
+        if self.settings_panel.right.layerr4_2_button.cget("text") == "ON":
+            self.controller.set_sell_derivative_on_switch(True)
+        else :
+            self.controller.set_sell_derivative_on_switch(False)
+
+        if self.finalize.start_bot_button.cget("text") == "Start bot":
+            self.controller.set_bot_state(2)
+        else :
+            self.controller.set_bot_state(1)
+
+        
+    

@@ -18,7 +18,7 @@ info : System modules owned by System class owned by rootView
 info : Controllers owned by rootView                     
 - start working on controllers                      Done [ ]
     - bot_dialoge_controller                        Done [ ]
-        - bot_dialoge_view                          Done [ ]
+        - bot_dialoge_view                          Done [X]
         - bot_dialoge_model                         Done [ ]
     - bot_graph_controller                          Done [ ]
         - bot_graph_view                            Done [X]
