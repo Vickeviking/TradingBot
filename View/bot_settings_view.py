@@ -3,6 +3,7 @@ from tkinter import Label
 from tkinter import Radiobutton
 from tkinter import font as tkFont
 from tkinter import * 
+from tkmacosx import Button as macButton
 from resources.colorpalete import colorPalette as cp
 
 class bot_settings_view_header(LabelFrame):
@@ -65,22 +66,18 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.nasdaq_header = Label(self.bottomHeaderFrameNasdaq, text="Nasdaq", bg=cp.clayred, fg="white", font=self.roboto16)
         self.nasdaq_opening_hours = Label(self.bottomHeaderFrameNasdaq, text="15:30-22:00", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_tesla = Label(self.nasdaqstockFrame1, text="tesla", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.nasdaq_tesla_radio_var = IntVar()
-        self.nasdaq_tesla_radio = Radiobutton(self.nasdaqstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_tesla_radio_var, value=1)
+        self.nasdaq_tesla_radio = Radiobutton(self.nasdaqstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_apple = Label(self.nasdaqstockFrame2, text="apple", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.nasdaq_apple_radio_var = IntVar()
-        self.nasdaq_apple_radio = Radiobutton(self.nasdaqstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_apple_radio_var, value=2)
+        self.nasdaq_apple_radio = Radiobutton(self.nasdaqstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_nvidia = Label(self.nasdaqstockFrame3, text="nvidia", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.nasdaq_nvidia_radio_var = IntVar()
-        self.nasdaq_nvidia_radio = Radiobutton(self.nasdaqstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_nvidia_radio_var, value=3)
+        self.nasdaq_nvidia_radio = Radiobutton(self.nasdaqstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_amazon = Label(self.nasdaqstockFrame4, text="amazon", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.nasdaq_amazon_radio_var = IntVar()
-        self.nasdaq_amazon_radio = Radiobutton(self.nasdaqstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_amazon_radio_var, value=4)
+        self.nasdaq_amazon_radio = Radiobutton(self.nasdaqstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14)
         #pack nasdaq stock pile
-        self.nasdaqstockFrame1.pack(anchor="e")
-        self.nasdaqstockFrame2.pack(anchor="e")
-        self.nasdaqstockFrame3.pack(anchor="e")
-        self.nasdaqstockFrame4.pack(anchor="e")
+        self.nasdaqstockFrame1.pack()
+        self.nasdaqstockFrame2.pack()
+        self.nasdaqstockFrame3.pack()
+        self.nasdaqstockFrame4.pack()
         # pack
         self.nasdaq_header.pack()
         self.nasdaq_opening_hours.pack()
@@ -100,22 +97,18 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.sthlm_header = Label(self.bottomHeaderFrameSthlm, text="Stockholm", bg=cp.clayred, fg="white", font=self.roboto16)
         self.sthlm_opening_hours = Label(self.bottomHeaderFrameSthlm, text="09:00-17:30", bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_astrazeneca = Label(self.sthlmstockFrame1, text="AstraZeneca", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_astrazeneca_radio_var = IntVar()
-        self.sthlm_astrazeneca_radio = Radiobutton(self.sthlmstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_astrazeneca_radio_var, value=1)
+        self.sthlm_astrazeneca_radio = Radiobutton(self.sthlmstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_investorab = Label(self.sthlmstockFrame2, text="InvestorAB", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_investorab_radio_var = IntVar()
-        self.sthlm_investorab_radio = Radiobutton(self.sthlmstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_investorab_radio_var, value=2)
+        self.sthlm_investorab_radio = Radiobutton(self.sthlmstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_abb = Label(self.sthlmstockFrame3, text="abb", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_abb_radio_var = IntVar()
-        self.sthlm_abb_radio = Radiobutton(self.sthlmstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_abb_radio_var, value=3)
+        self.sthlm_abb_radio = Radiobutton(self.sthlmstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_atlascopco = Label(self.sthlmstockFrame4, text="atlas copco", bg=cp.clayred, fg="white", font=self.roboto14)
-        self.sthlm_atlascopco_radio_var = IntVar()
-        self.sthlm_atlascopco_radio = Radiobutton(self.sthlmstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_atlascopco_radio_var, value=4)
+        self.sthlm_atlascopco_radio = Radiobutton(self.sthlmstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14)
         #pack sthlm stock pile
-        self.sthlmstockFrame1.pack(anchor="e")
-        self.sthlmstockFrame2.pack(anchor="e")
-        self.sthlmstockFrame3.pack(anchor="e")
-        self.sthlmstockFrame4.pack(anchor= "e")
+        self.sthlmstockFrame1.pack()
+        self.sthlmstockFrame2.pack()
+        self.sthlmstockFrame3.pack()
+        self.sthlmstockFrame4.pack()
         # pack
         self.sthlm_header.pack()
         self.sthlm_opening_hours.pack()
@@ -138,14 +131,6 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.nasdaq_opening_hours.pack()
         self.sthlm_header.pack()
         self.sthlm_opening_hours.pack()
-
-        #pack container for header & times
-
-
-    
-
-
-
 
 
 class bot_settings_view_settings_panel_border(LabelFrame):
@@ -281,7 +266,7 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #left layer 4
         self.layerl4_1_label = Label(self.layerl4_1, text="Derivative Switch", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerl4_1_label.pack()
-        self.layerl4_2_button = Button(self.layerl4_2, text="OFF", bg=cp.clayred, fg="black", font=self.roboto14, width=1)
+        self.layerl4_2_button = macButton(self.layerl4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40)
         self.layerl4_2_button.pack(side="left")
         self.layerl4_2_label2 = Label(self.layerl4_2, text="steps", bg=cp.clayred, fg="white", font=self.roboto20, padx=5)
         self.layerl4_2_label2.pack(side="left")
@@ -315,12 +300,19 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #right layer 4
         self.layerr4_1_label = Label(self.layerr4_1, text="Derivative Switch", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerr4_1_label.pack()
-        self.layerr4_2_button = Button(self.layerr4_2, text="OFF", bg=cp.clayred, fg="black", font=self.roboto14, width=1)
+        self.layerr4_2_button = macButton(self.layerr4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40)
         self.layerr4_2_button.pack(side="left")
         self.layerr4_2_label2 = Label(self.layerr4_2, text="steps", bg=cp.clayred, fg="white", font=self.roboto20, padx=5)
         self.layerr4_2_label2.pack(side="left")
         self.layerr4_2_numberinput = Entry(self.layerr4_2, bg="white", fg="black", font=self.roboto14, width=1)
         self.layerr4_2_numberinput.pack(side="left")
+
+
+
+
+
+
+
 
 class bot_settings_view_settings_panel(LabelFrame):
     def __init__(self, master=None,controller=None, text=None, bg=cp.clayred):
@@ -354,8 +346,24 @@ class bot_settings_view_finalize(LabelFrame):
         self.controller = controller
         self.configure(border=0, borderwidth=0)
         self.pack_propagate(0)
-        
-        # add  (startbalance label , entry ), save settings btn, reset settings btn, start bot btn, reset bot btn
+        self.roboto18 = tkFont.Font(family="Roboto", size=18, weight="normal")
+        # create class instance
+        self.padding = Label(self, bg=cp.clayred, width=4)
+        self.start_balance = Label(self, text="Start balance: ", bg=cp.clayred, fg="white", font=self.roboto18)
+        self.start_balance_entry = Entry(self, bg="white", fg="black", font=self.roboto18, width=6)
+        self.padding2 = Label(self, bg=cp.clayred, width=4)
+        self.save_settings_button = macButton(self, text="Save settings", bg=cp.smoothblack, fg="white", font=self.roboto18, width=140)
+        self.padding3 = Label(self, bg=cp.clayred, width=2)
+        self.start_bot_button = macButton(self, text="Start bot", bg=cp.smoothblack, fg="white", font=self.roboto18, width=90)
+
+        # add to grid
+        self.padding.pack(side="left")
+        self.start_balance.pack(side="left", padx=4)
+        self.start_balance_entry.pack(side="left")
+        self.padding2.pack(side="left")
+        self.save_settings_button.pack(side="left")
+        self.padding3.pack(side="left")
+        self.start_bot_button.pack(side="left")
 
 
 class bot_settings_veiw(LabelFrame):
