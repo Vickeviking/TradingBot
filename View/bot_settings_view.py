@@ -3,6 +3,7 @@ from tkinter import Label
 from tkinter import Radiobutton
 from tkinter import font as tkFont
 from tkinter import * 
+from tkmacosx import Button as macButton
 from resources.colorpalete import colorPalette as cp
 
 class bot_settings_view_header(LabelFrame):
@@ -131,14 +132,6 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.sthlm_header.pack()
         self.sthlm_opening_hours.pack()
 
-        #pack container for header & times
-
-
-    
-
-
-
-
 
 class bot_settings_view_settings_panel_border(LabelFrame):
     def __init__(self, master=None,controller=None, text=None, bg=cp.smoothblack):
@@ -266,14 +259,14 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #left layer 3
         self.layerl3_1_label = Label(self.layerl3_1, text="Procentage dip", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerl3_1_label.pack()
-        self.layerl3_2_slider = Scale(self.layerl3_2, from_=0, to=100, bg=cp.clayred, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
+        self.layerl3_2_slider = Scale(self.layerl3_2, from_=0, to=100, bg=cp.smoothblack, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
         self.layerl3_2_slider.pack(side="left")
         self.layerl3_2_label = Label(self.layerl3_2, text="0%", bg=cp.clayred, fg="white", font=self.roboto20)
         self.layerl3_2_label.pack(side="left")
         #left layer 4
         self.layerl4_1_label = Label(self.layerl4_1, text="Derivative Switch", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerl4_1_label.pack()
-        self.layerl4_2_button = Button(self.layerl4_2, text="OFF", bg=cp.clayred, fg="black", font=self.roboto14, width=1)
+        self.layerl4_2_button = macButton(self.layerl4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40)
         self.layerl4_2_button.pack(side="left")
         self.layerl4_2_label2 = Label(self.layerl4_2, text="steps", bg=cp.clayred, fg="white", font=self.roboto20, padx=5)
         self.layerl4_2_label2.pack(side="left")
@@ -282,7 +275,7 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #left layer 5
         self.layerl5_1_label = Label(self.layerl5_1, text="Quantity at a time", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerl5_1_label.pack()
-        self.layerl5_2_slider = Scale(self.layerl5_2, from_=0, to=100, bg=cp.clayred, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
+        self.layerl5_2_slider = Scale(self.layerl5_2, from_=0, to=100, bg=cp.smoothblack, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
         self.layerl5_2_slider.pack(side="left")
         self.layerl5_2_label = Label(self.layerl5_2, text="0%", bg=cp.clayred, fg="white", font=self.roboto20)
         self.layerl5_2_label.pack(side="left")
@@ -293,21 +286,21 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #right layer 2
         self.layerr2_1_label = Label(self.layerr2_1, text="Profit exit", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerr2_1_label.pack()
-        self.layerr2_2_slider = Scale(self.layerr2_2, from_=0, to=100, bg=cp.clayred, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
+        self.layerr2_2_slider = Scale(self.layerr2_2, from_=0, to=100, bg=cp.smoothblack, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
         self.layerr2_2_slider.pack(side="left")
         self.layerr2_2_label = Label(self.layerr2_2, text="0%", bg=cp.clayred, fg="white", font=self.roboto20)
         self.layerr2_2_label.pack(side="left")
         #right layer 3
         self.layerr3_1_label = Label(self.layerr3_1, text="Loss exit", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerr3_1_label.pack()
-        self.layerr3_2_slider = Scale(self.layerr3_2, from_=0, to=100, bg=cp.clayred, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
+        self.layerr3_2_slider = Scale(self.layerr3_2, from_=0, to=100, bg=cp.smoothblack, fg="white", font=self.roboto14, orient=HORIZONTAL, length=70, showvalue=False)
         self.layerr3_2_slider.pack(side="left")
         self.layerr3_2_label = Label(self.layerr3_2, text="0%", bg=cp.clayred, fg="white", font=self.roboto20)
         self.layerr3_2_label.pack(side="left")
         #right layer 4
         self.layerr4_1_label = Label(self.layerr4_1, text="Derivative Switch", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerr4_1_label.pack()
-        self.layerr4_2_button = Button(self.layerr4_2, text="OFF", bg=cp.clayred, fg="black", font=self.roboto14, width=1)
+        self.layerr4_2_button = macButton(self.layerr4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40)
         self.layerr4_2_button.pack(side="left")
         self.layerr4_2_label2 = Label(self.layerr4_2, text="steps", bg=cp.clayred, fg="white", font=self.roboto20, padx=5)
         self.layerr4_2_label2.pack(side="left")
@@ -352,6 +345,25 @@ class bot_settings_view_finalize(LabelFrame):
         self.master = master
         self.controller = controller
         self.configure(border=0, borderwidth=0)
+        self.pack_propagate(0)
+        self.roboto18 = tkFont.Font(family="Roboto", size=18, weight="normal")
+        # create class instance
+        self.padding = Label(self, bg=cp.clayred, width=4)
+        self.start_balance = Label(self, text="Start balance: ", bg=cp.clayred, fg="white", font=self.roboto18)
+        self.start_balance_entry = Entry(self, bg="white", fg="black", font=self.roboto18, width=6)
+        self.padding2 = Label(self, bg=cp.clayred, width=4)
+        self.save_settings_button = macButton(self, text="Save settings", bg=cp.smoothblack, fg="white", font=self.roboto18, width=140)
+        self.padding3 = Label(self, bg=cp.clayred, width=2)
+        self.start_bot_button = macButton(self, text="Start bot", bg=cp.smoothblack, fg="white", font=self.roboto18, width=90)
+
+        # add to grid
+        self.padding.pack(side="left")
+        self.start_balance.pack(side="left", padx=4)
+        self.start_balance_entry.pack(side="left")
+        self.padding2.pack(side="left")
+        self.save_settings_button.pack(side="left")
+        self.padding3.pack(side="left")
+        self.start_bot_button.pack(side="left")
 
 
 class bot_settings_veiw(LabelFrame):
