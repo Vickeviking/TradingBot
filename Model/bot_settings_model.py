@@ -21,7 +21,7 @@ class bot_settings_model:
         self.sell_derivative_on_switch = False
         self.sell_derivative_steps = 0
         # start balance
-        self.start_balance = 0
+        self.start_balance = 100
         # bot state
         self.bot_state = bot_states_enum.STOPPED
 

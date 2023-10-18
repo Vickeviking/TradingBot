@@ -5,6 +5,8 @@ from Controller.bot_graph_controller import bot_graph_controller
 from Controller.bot_settings_controller import bot_settings_controller
 from Controller.live_stocks_controller import live_stocks_controller
 from resources.app_enums import ControllerTypes
+from Model.market import market as marketClass
+from Model.trade_bot import tradeBot as tradeBotClass
 
 class MyApp:
     def __init__(self):
@@ -24,33 +26,50 @@ class MyApp:
             ControllerTypes.BOT_SETTINGS: bot_settings_controller(self.app),
             ControllerTypes.LIVE_STOCKS: live_stocks_controller(self.app)
         }
-        # give controllers acces to dialoge controller, to display msg
-        self.controllers[ControllerTypes.BOT_SETTINGS].dialoge_controller = self.controllers[ControllerTypes.BOT_DIALOGUE]
-
-
+        # Initializing frames
         bot_dialoge_frame = self.controllers[ControllerTypes.BOT_DIALOGUE].get_label_frame()
         bot_dialoge_frame.pack_propagate(0)
         bot_graph_frame = self.controllers[ControllerTypes.BOT_GRAPH].get_label_frame()
         bot_graph_frame.pack_propagate(0)
         bot_settings_frame = self.controllers[ControllerTypes.BOT_SETTINGS].get_label_frame()
-        
+        bot_settings_frame.pack_propagate(0)
         live_stocks_frame = self.controllers[ControllerTypes.LIVE_STOCKS].get_label_frame()
-        
-        # Displaying in frame
+        live_stocks_frame.pack_propagate(0)
+
+        # Displaying frames
         bot_dialoge_frame.grid(row=0, column=0, sticky="nsew")
         bot_graph_frame.grid(row=0, column=1, sticky="nsew")
         bot_settings_frame.grid(row=0, column=2, sticky="nsew")
         live_stocks_frame.grid(row=1, column=0, columnspan=3, sticky="nsew")
 
+        #init system models 
+        self.market = marketClass()  
+        self.trade_bot = tradeBotClass()
+
+
+        # last touches (direct inits in creation canceled, because of circular dependencies?, bad error msg so hard to tell, but this way works)
+        # give controllers acces to dialoge controller, to display msg
+        self.trade_bot.settings = self.controllers[ControllerTypes.BOT_SETTINGS].model
+        self.trade_bot.market = self.market
+        self.controllers[ControllerTypes.BOT_SETTINGS].dialoge_controller = self.controllers[ControllerTypes.BOT_DIALOGUE]
+        self.trade_bot.wallet.start_value = self.controllers[ControllerTypes.BOT_SETTINGS].model.start_balance
+       
+        
+
+
         # Start the update clock
         self.update_clock()
 
     def update_clock(self):
-        # implement updates here
+        # update controllers, frames are updated by controllers
         self.controllers[ControllerTypes.BOT_DIALOGUE].update()
         self.controllers[ControllerTypes.BOT_GRAPH].update()
         self.controllers[ControllerTypes.BOT_SETTINGS].update()
         self.controllers[ControllerTypes.LIVE_STOCKS].update()
+        # update system models (are "floating around and used by controllers, so stored in top layer")
+       #TODO self.trade_bot.update()
+       #TODO self.market.update()
+
         self.app.after(300, self.update_clock)
         
     def run(self):
