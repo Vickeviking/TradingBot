@@ -377,7 +377,7 @@ class bot_settings_view_finalize(LabelFrame):
         self.start_balance = Label(self, text="Start balance: ", bg=cp.clayred, fg="white", font=self.roboto18)
         self.start_balance_entry = Entry(self, bg="white", fg="black", font=self.roboto18, width=6, border=0, borderwidth=0)
         self.padding2 = Label(self, bg=cp.clayred, width=4)
-        self.save_settings_button = macButton(self, text="Save settings", bg=cp.smoothblack, fg="white", font=self.roboto18, width=140, borderless = 1,command=lambda: self.controller.save_settings_clicked())
+        self.save_settings_button = macButton(self, text="Save settings", bg=cp.smoothblack, fg="white", font=self.roboto18, width=140, borderless = 1,command=lambda: self.controller.save_settings_clicked() )
         self.padding3 = Label(self, bg=cp.clayred, width=2)
 
         self.start_bot_button = macButton(self, text="Start bot", bg=cp.smoothblack, fg="white", font=self.roboto18, width=90, command=lambda: self.start_bot_clicked(), borderless = 1)

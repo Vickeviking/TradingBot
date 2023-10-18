@@ -70,8 +70,13 @@ class bot_dialoge_view_dialoge_settings(LabelFrame):
         self.Stock_totprice_label = Label(self.Stock_totprice, text="TotPrice", bg=colorPalette.lightbrown, fg="white", font=self.roboto18)
         self.Stock_totprice_label.pack(side="left", anchor="w")
 
+
         self.clearConvo_btn = macBtn(self, text="Clear Dialoge", bg=colorPalette.smoothblack, fg="white", font=self.roboto18, command=self.controller.clearConvo, height=35, borderless=1)
         self.clearConvo_btn.pack(side="bottom", fill="both", padx=10, pady=10)
+
+        self.saveseetings_btn = macBtn(self, text="Save Settings", bg=colorPalette.clayred, fg="white", font=self.roboto18, command=self.saveSettingsClicked, height=35, borderless=1)
+        self.saveseetings_btn.pack(side="bottom", fill="both", padx=10, pady=20)
+
 
     def update(self):
         # update radio btns
@@ -92,6 +97,9 @@ class bot_dialoge_view_dialoge_settings(LabelFrame):
         else:
             self.Stock_totprice_radio.set(0)
 
+    def saveSettingsClicked(self):
+        self.controller.addMessage(customMessage="settings updated, example msg below")
+        self.controller.addMessage(stock = "Appl", quantity = "2", price = "100", totPrice = "200")
 
 
 
@@ -103,7 +111,7 @@ class bot_dialoge_view_dialoge(LabelFrame):
         super().__init__(master, text=text, bg=bg)
         self.master = master
         self.controller = controller
-        self.font = tkFont.Font(family="Roboto", size=16, weight="normal")
+        self.font14 = tkFont.Font(family="Roboto", size=14, weight="normal")
         self.pack_propagate(0)
         # draw all messages in the dialoge, pack each message under each other
 
@@ -114,7 +122,7 @@ class bot_dialoge_view_dialoge(LabelFrame):
             for widget in self.winfo_children():
                 widget.destroy()
             # cleared convo msg
-            self.controller.addMessage(customMessage="Cleared convo")
+            self.controller.addMessage(customMessage="Cleared conversation")
         messages = self.controller.getDialoge()
         messages_lenght_lastUpdate = self.controller.getNmbrOfMessages_lastUpdate()
         if len(messages) == messages_lenght_lastUpdate:
@@ -123,10 +131,16 @@ class bot_dialoge_view_dialoge(LabelFrame):
             # pack all new messages, only NEW messages
             for i in range(messages_lenght_lastUpdate, len(messages)):
                 message = messages[i]
+                # get color
                 cstmMessageColor = message.customMessage_color
                 if cstmMessageColor == None:
-                    cstmMessageColor = "white"
-                message_label = Label(self, text=message.get_message_string(), bg=colorPalette.brown, fg=cstmMessageColor, font=self.font)
+                    if message.bought and message.customMessage == None:
+                        cstmMessageColor = colorPalette.neongreen
+                    elif message.bought == False and message.customMessage == None:
+                        cstmMessageColor = colorPalette.neonred
+                    else:
+                        cstmMessageColor = "white"
+                message_label = Label(self, text=message.get_message_string(), bg=colorPalette.brown, fg=cstmMessageColor, font=self.font14)
                 message_label.pack(side="top", anchor="w")
             # update nmbr of messages last update
             self.controller.setNmbrOfMessages_lastUpdate(len(messages))

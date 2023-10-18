@@ -14,13 +14,11 @@ class bot_dialoge_controller:
 
     def get_label_frame(self):
         return self.view
-        
-    def addMessage(self, message):
-        self.model.addMessage(message)
-        self.update()
     
     def addMessage(self, stock = None, quantity = None, price = None, totPrice = None, customMessage = None, customMessage_color = None):
-        self.model.addMessage(message(stock, quantity, price, totPrice, customMessage, customMessage_color))
+        sendMessage = message(self.model, stock, quantity, price, totPrice, customMessage, customMessage_color)
+        sendMessage.set_parent(self.model)
+        self.model.addMessage(sendMessage)
 
     def clearConvo(self):
         self.model.dialoge = []

@@ -79,7 +79,7 @@ class bot_settings_controller:
 
     def save_settings_clicked(self):
         # dialoge message 
-        self.message = "Settings saved"
+        self.message = "Bot settings saved"
         self.dialoge_controller.addMessage(customMessage=self.message)
         self.update()
     
