@@ -2,6 +2,7 @@ from tkinter import LabelFrame
 import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import Label
+from tkmacosx import Button as macBtn
 
 from resources.colorpalete import colorPalette
 
@@ -43,33 +44,54 @@ class bot_dialoge_view_dialoge_settings(LabelFrame):
         # add radio btn and label to each label frame
         self.Stock_setting_radio = tk.IntVar()
         self.Stock_setting_radio.set(0)
-        self.Stock_setting_radio1 = tk.Radiobutton(self.Stock_setting, text=None, variable=self.Stock_setting_radio, value=1, bg=colorPalette.lightbrown, fg="white", border=0)
+        self.Stock_setting_radio1 = tk.Radiobutton(self.Stock_setting, text=None, variable=self.Stock_setting_radio, value=1, bg=colorPalette.lightbrown, fg="white", border=0, borderwidth=0, command=self.controller.showStockClicked)
         self.Stock_setting_radio1.pack(side="left", anchor="e")
         self.Stock_setting_label = Label(self.Stock_setting, text="Stock", bg=colorPalette.lightbrown, fg="white", font=self.roboto18)
         self.Stock_setting_label.pack(side="left", anchor="w")
 
         self.Stock_quantity_radio = tk.IntVar()
         self.Stock_quantity_radio.set(0)
-        self.Stock_quantity_radio1 = tk.Radiobutton(self.Stock_quantity, text=None, variable=self.Stock_quantity_radio, value=1, bg=colorPalette.lightbrown, fg="white")
+        self.Stock_quantity_radio1 = tk.Radiobutton(self.Stock_quantity, text=None, variable=self.Stock_quantity_radio, value=1, bg=colorPalette.lightbrown, fg="white", border=0, borderwidth=0, command=self.controller.showQuantityClicked)
         self.Stock_quantity_radio1.pack(side="left", anchor="e")
         self.Stock_quantity_label = Label(self.Stock_quantity, text="Quantity", bg=colorPalette.lightbrown, fg="white", font=self.roboto18)
         self.Stock_quantity_label.pack(side="left", anchor="w")
 
         self.Stock_price_radio = tk.IntVar()
         self.Stock_price_radio.set(0)
-        self.Stock_price_radio1 = tk.Radiobutton(self.Stock_price, text=None, variable=self.Stock_price_radio, value=1, bg=colorPalette.lightbrown, fg="white")
+        self.Stock_price_radio1 = tk.Radiobutton(self.Stock_price, text=None, variable=self.Stock_price_radio, value=1, bg=colorPalette.lightbrown, fg="white", border=0, borderwidth=0, command=self.controller.showPriceClicked)
         self.Stock_price_radio1.pack(side="left",anchor="e")
         self.Stock_price_label = Label(self.Stock_price, text="Price", bg=colorPalette.lightbrown, fg="white", font=self.roboto18)
         self.Stock_price_label.pack(side="left", anchor="w")
 
         self.Stock_totprice_radio = tk.IntVar()
         self.Stock_totprice_radio.set(0)
-        self.Stock_totprice_radio1 = tk.Radiobutton(self.Stock_totprice, text=None, variable=self.Stock_totprice_radio, value=1, bg=colorPalette.lightbrown, fg="white")
+        self.Stock_totprice_radio1 = tk.Radiobutton(self.Stock_totprice, text=None, variable=self.Stock_totprice_radio, value=1, bg=colorPalette.lightbrown, fg="white", border=0, borderwidth=0, command=self.controller.showTotPriceClicked)
         self.Stock_totprice_radio1.pack(side="left", anchor="e")
         self.Stock_totprice_label = Label(self.Stock_totprice, text="TotPrice", bg=colorPalette.lightbrown, fg="white", font=self.roboto18)
         self.Stock_totprice_label.pack(side="left", anchor="w")
+
+        self.clearConvo_btn = macBtn(self, text="Clear Dialoge", bg=colorPalette.smoothblack, fg="white", font=self.roboto18, command=self.controller.clearConvo, height=35, borderless=1)
+        self.clearConvo_btn.pack(side="bottom", fill="both", padx=10, pady=10)
+
     def update(self):
-        pass
+        # update radio btns
+        if self.controller.getSettings().showStock:
+            self.Stock_setting_radio.set(1)
+        else:
+            self.Stock_setting_radio.set(0)
+        if self.controller.getSettings().showQuantity:
+            self.Stock_quantity_radio.set(1)
+        else:
+            self.Stock_quantity_radio.set(0)
+        if self.controller.getSettings().showPrice:
+            self.Stock_price_radio.set(1)
+        else:
+            self.Stock_price_radio.set(0)
+        if self.controller.getSettings().showTotPrice:
+            self.Stock_totprice_radio.set(1)
+        else:
+            self.Stock_totprice_radio.set(0)
+
 
 
 
@@ -86,6 +108,13 @@ class bot_dialoge_view_dialoge(LabelFrame):
         # draw all messages in the dialoge, pack each message under each other
 
     def update(self):
+        # check if convo has been cleared
+        if self.controller.convoCleared:
+            self.controller.convoCleared = False
+            for widget in self.winfo_children():
+                widget.destroy()
+            # cleared convo msg
+            self.controller.addMessage(customMessage="Cleared convo")
         messages = self.controller.getDialoge()
         messages_lenght_lastUpdate = self.controller.getNmbrOfMessages_lastUpdate()
         if len(messages) == messages_lenght_lastUpdate:
