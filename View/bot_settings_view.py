@@ -283,7 +283,7 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #left layer 4
         self.layerl4_1_label = Label(self.layerl4_1, text="Derivative Switch", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerl4_1_label.pack()
-        self.layerl4_2_button = macButton(self.layerl4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40, command=lambda: self.buy_derivative_clicked())
+        self.layerl4_2_button = macButton(self.layerl4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40, command=lambda: self.buy_derivative_clicked(), borderless=1, border=0, borderwidth=0)
         self.layerl4_2_button.pack(side="left")
         self.layerl4_2_label2 = Label(self.layerl4_2, text="steps", bg=cp.clayred, fg="white", font=self.roboto20, padx=5)
         self.layerl4_2_label2.pack(side="left")
@@ -317,7 +317,7 @@ class bot_settings_view_settings_panel_right(LabelFrame):
         #right layer 4
         self.layerr4_1_label = Label(self.layerr4_1, text="Derivative Switch", bg=cp.clayred, fg="white", font=self.roboto14)
         self.layerr4_1_label.pack()
-        self.layerr4_2_button = macButton(self.layerr4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40, command=lambda: self.sell_derivative_clicked(), background=cp.smoothblack, border=0, borderwidth=0)
+        self.layerr4_2_button = macButton(self.layerr4_2, text="OFF", bg=cp.smoothblack, fg="white", font=self.roboto14, width=40, command=lambda: self.sell_derivative_clicked(), background=cp.smoothblack, border=0, borderwidth=0, borderless=1)
         self.layerr4_2_button.pack(side="left")
         self.layerr4_2_label2 = Label(self.layerr4_2, text="steps", bg=cp.clayred, fg="white", font=self.roboto20, padx=5)
         self.layerr4_2_label2.pack(side="left")
@@ -375,12 +375,12 @@ class bot_settings_view_finalize(LabelFrame):
         # create class instance
         self.padding = Label(self, bg=cp.clayred, width=4)
         self.start_balance = Label(self, text="Start balance: ", bg=cp.clayred, fg="white", font=self.roboto18)
-        self.start_balance_entry = Entry(self, bg="white", fg="black", font=self.roboto18, width=6)
+        self.start_balance_entry = Entry(self, bg="white", fg="black", font=self.roboto18, width=6, border=0, borderwidth=0)
         self.padding2 = Label(self, bg=cp.clayred, width=4)
-        self.save_settings_button = macButton(self, text="Save settings", bg=cp.smoothblack, fg="white", font=self.roboto18, width=140)
+        self.save_settings_button = macButton(self, text="Save settings", bg=cp.smoothblack, fg="white", font=self.roboto18, width=140, borderless = 1,command=lambda: self.controller.save_settings_clicked())
         self.padding3 = Label(self, bg=cp.clayred, width=2)
 
-        self.start_bot_button = macButton(self, text="Start bot", bg=cp.smoothblack, fg="white", font=self.roboto18, width=90, command=lambda: self.start_bot_clicked())
+        self.start_bot_button = macButton(self, text="Start bot", bg=cp.smoothblack, fg="white", font=self.roboto18, width=90, command=lambda: self.start_bot_clicked(), borderless = 1)
 
         # add to grid
         self.padding.pack(side="left")
@@ -395,6 +395,7 @@ class bot_settings_view_finalize(LabelFrame):
             self.start_bot_button.configure(text="Stop bot")
         else :
             self.start_bot_button.configure(text="Start bot")
+        self.controller.startBtnClicked()
 
 
 class bot_settings_veiw(LabelFrame):

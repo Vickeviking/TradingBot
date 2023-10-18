@@ -5,4 +5,4 @@ class colorPalette:
     lightbrown = "#948282"
     smoothblack = "#424242"
     neongreen = "#28D863"
-    neonred = "D83328"
+    neonred = "#D83328"

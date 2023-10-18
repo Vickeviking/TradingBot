@@ -21,7 +21,8 @@ class bot_dialoge_view_header(LabelFrame):
         self.header1.pack(side="left", fill="both", expand=True, padx=70)
         self.header2 = Label(self, text="Dialoge Settings", bg=colorPalette.smoothblack, fg="white", font=self.roboto16)
         self.header2.pack(side="left", fill="both", expand=True)
-# dialogesettings
+    def update(self):
+        pass
 class bot_dialoge_view_dialoge_settings(LabelFrame):
     def __init__(self, master=None,controller=None, text=None, bg=colorPalette.lightbrown):
         super().__init__(master, text=text, bg=bg)
@@ -67,7 +68,8 @@ class bot_dialoge_view_dialoge_settings(LabelFrame):
         self.Stock_totprice_radio1.pack(side="left", anchor="e")
         self.Stock_totprice_label = Label(self.Stock_totprice, text="TotPrice", bg=colorPalette.lightbrown, fg="white", font=self.roboto18)
         self.Stock_totprice_label.pack(side="left", anchor="w")
-
+    def update(self):
+        pass
 
 
 
@@ -79,6 +81,29 @@ class bot_dialoge_view_dialoge(LabelFrame):
         super().__init__(master, text=text, bg=bg)
         self.master = master
         self.controller = controller
+        self.font = tkFont.Font(family="Roboto", size=16, weight="normal")
+        self.pack_propagate(0)
+        # draw all messages in the dialoge, pack each message under each other
+
+    def update(self):
+        messages = self.controller.getDialoge()
+        messages_lenght_lastUpdate = self.controller.getNmbrOfMessages_lastUpdate()
+        if len(messages) == messages_lenght_lastUpdate:
+            return
+        else:
+            # pack all new messages, only NEW messages
+            for i in range(messages_lenght_lastUpdate, len(messages)):
+                message = messages[i]
+                cstmMessageColor = message.customMessage_color
+                if cstmMessageColor == None:
+                    cstmMessageColor = "white"
+                message_label = Label(self, text=message.get_message_string(), bg=colorPalette.brown, fg=cstmMessageColor, font=self.font)
+                message_label.pack(side="top", anchor="w")
+            # update nmbr of messages last update
+            self.controller.setNmbrOfMessages_lastUpdate(len(messages))
+
+
+
         
 class bot_dialoge_veiw(LabelFrame):
     def __init__(self, master=None,controller=None, text=None, bg="white"):
@@ -102,4 +127,8 @@ class bot_dialoge_veiw(LabelFrame):
         self.header.grid(row=0, column=0,columnspan= 3,sticky="nsew", padx=0, pady=0)
         self.dialoge.grid(row=1, column=0, sticky="nsew", padx=0, pady=0)
         self.dialoge_settings.grid(row=1, column=1, sticky="nsew", padx=0, pady=0)
+    def update(self):
+        self.dialoge.update()
+        self.dialoge_settings.update()
+        self.header.update()
 

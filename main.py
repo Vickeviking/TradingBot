@@ -4,13 +4,7 @@ from Controller.bot_dialoge_controller import bot_dialoge_controller
 from Controller.bot_graph_controller import bot_graph_controller
 from Controller.bot_settings_controller import bot_settings_controller
 from Controller.live_stocks_controller import live_stocks_controller
-from enum import Enum
-
-class ControllerTypes(Enum):
-    BOT_DIALOGUE = 1
-    BOT_GRAPH = 2
-    BOT_SETTINGS = 3
-    LIVE_STOCKS = 4
+from resources.app_enums import ControllerTypes
 
 class MyApp:
     def __init__(self):
@@ -30,6 +24,10 @@ class MyApp:
             ControllerTypes.BOT_SETTINGS: bot_settings_controller(self.app),
             ControllerTypes.LIVE_STOCKS: live_stocks_controller(self.app)
         }
+        # give controllers acces to dialoge controller, to display msg
+        self.controllers[ControllerTypes.BOT_SETTINGS].dialoge_controller = self.controllers[ControllerTypes.BOT_DIALOGUE]
+
+
         bot_dialoge_frame = self.controllers[ControllerTypes.BOT_DIALOGUE].get_label_frame()
         bot_dialoge_frame.pack_propagate(0)
         bot_graph_frame = self.controllers[ControllerTypes.BOT_GRAPH].get_label_frame()
@@ -55,10 +53,15 @@ class MyApp:
         self.controllers[ControllerTypes.LIVE_STOCKS].update()
         self.app.after(300, self.update_clock)
         
-
     def run(self):
         # Start the main loop
         self.app.mainloop()
+
+    def get_controller(self, controller_type):
+        return self.controllers[controller_type]
+
+
+
 
 def main():
     my_app = MyApp()

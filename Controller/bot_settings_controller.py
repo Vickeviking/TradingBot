@@ -2,15 +2,18 @@
 from View.bot_settings_view import bot_settings_veiw
 from Model.bot_settings_model import *
 from resources.stock_enums import *
+from resources.app_enums import ControllerTypes
+from resources.colorpalete import colorPalette
 
 class bot_settings_controller:
-    def __init__(self, master=None):
+    def __init__(self, master=None, ):
         self.master = master
         # Create a frame for the label frame
         self.view = bot_settings_veiw(master=self.master, controller=self) 
         self.view.grid(row=0, column=0, sticky="nsew")  
         #create model
         self.model = bot_settings_model(self)
+        self.dialoge_controller = None
 
 
     def get_label_frame(self):
@@ -62,12 +65,23 @@ class bot_settings_controller:
             self.update()
 
     def startBtnClicked(self):
-        if self.model.bot_state == bot_states_enum.STOPPED:
+        msgColor = None
+        if self.model.bot_state == bot_states_enum.STOPPED.value:
             self.set_bot_state(bot_states_enum.RUNNING)
+            msgColor = colorPalette.neongreen
         else:
             self.set_bot_state(bot_states_enum.STOPPED)
+            msgColor = colorPalette.neonred
+        # dialoge message 
+        self.message = "Bot state changed to: " + self.model.bot_state.name
+        self.dialoge_controller.addMessage(customMessage=self.message, customMessage_color=msgColor)
         self.update()
 
+    def save_settings_clicked(self):
+        # dialoge message 
+        self.message = "Settings saved"
+        self.dialoge_controller.addMessage(customMessage=self.message)
+        self.update()
     
 
 
