@@ -1,4 +1,5 @@
 from resources.stock_enums import stock_types_enum as stock_types
+from resources.app_enums import bot_states_enum as bot_states
 
 class signal:
     def __init__(self, isSignaling = False, stock = None):
@@ -135,6 +136,8 @@ class marketSignalLogic:
         self.sellSignalLogic = sellSignalLogic(market, settings)
         self.signal = signal()
         self.isSignaling = False
+        self.state = bot_states.STOPPED
+        self.settings = settings
     def checkForBuySignal(self):
         if self.buySignalLogic.isSignaling:
             self.signal = self.buySignalLogic.signal
@@ -152,7 +155,22 @@ class marketSignalLogic:
         self.buySignalLogic.signal = signal()
         self.sellSignalLogic.isSignaling = False
         self.sellSignalLogic.signal = signal()
+    def switchState(self, botsStateParam):
+        if botsStateParam.value == bot_states.STOPPED.value: # switched off
+            self.state = bot_states.STOPPED
+            self.buySignalLogic.isSignaling = False
+            self.sellSignalLogic.isSignaling = False
+            self.resetSignal()
+        else: #switched on
+            self.state = bot_states.RUNNING
+            self.buySignalLogic.isSignaling = False
+            self.sellSignalLogic.isSignaling = False
+            self.resetSignal()
+
+
     def update(self):
+        if (self.state == bot_states.STOPPED.value): #TODO can cause errors check compatability with rest
+            return
         self.buySignalLogic.update()
         self.sellSignalLogic.update()
         self.checkForBuySignal()

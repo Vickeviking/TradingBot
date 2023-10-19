@@ -7,6 +7,7 @@ from Controller.live_stocks_controller import live_stocks_controller
 from resources.app_enums import ControllerTypes
 from Model.market import market as marketClass
 from Model.trade_bot import tradeBot as tradeBotClass
+from resources.app_enums import bot_states_enum as bot_states
 
 class MyApp:
     def __init__(self):
@@ -20,7 +21,7 @@ class MyApp:
         self.app.grid_rowconfigure(1, weight=1)
 
         #globals 
-        self.botStatus = 2 # 1 = running, 2 = stopped
+        self.botStatus = bot_states.STOPPED # 1 = running, 2 = stopped
 
         # Initializing controllers
         self.controllers = {
@@ -52,10 +53,9 @@ class MyApp:
 
         # last touches (direct inits in creation canceled, because of circular dependencies?, bad error msg so hard to tell, but this way works)
         # give controllers acces to dialoge controller, to display msg
-        self.trade_bot.settings = self.controllers[ControllerTypes.BOT_SETTINGS].model
         self.trade_bot.market = self.market
         self.controllers[ControllerTypes.BOT_SETTINGS].dialoge_controller = self.controllers[ControllerTypes.BOT_DIALOGUE]
-        self.trade_bot.wallet.start_value = self.controllers[ControllerTypes.BOT_SETTINGS].model.start_balance
+        self.controllers[ControllerTypes.BOT_SETTINGS].trade_bot = self.trade_bot
        
         
 
@@ -77,21 +77,16 @@ class MyApp:
         self.app.after(300, self.update_clock)
     
     def checkBotChange(self):
-        bot_state = self.controllers[ControllerTypes.BOT_SETTINGS].model.bot_state.value
-        if bot_state != self.botStatus: # bot state changed
-            self.botStatus = bot_state
-            #TODO act upon bot state change, view already implememnted but do these: 
-                #TODO if started 
-                    #TODO tradebot reset -> add settings to tradebot
-                    #TODO market signal logic reset
-                    #TODO wallet reset
-                    #TODO market reset -> should now show the picked stocks 
-                #TODO if stopped
-                    #TODO tradebot reset
-                    #TODO market signal logic reset
-                    #TODO wallet reset
-                    #TODO market reset -> should now show nothing ? 
-                    #TODO show off values , turn off models ? each model having off/on state 
+        bot_state = self.controllers[ControllerTypes.BOT_SETTINGS].model.bot_state
+        if bot_state != self.botStatus.value: # bot state changed
+            if bot_state == bot_states.RUNNING.value: #only checking if changed 
+                    self.botStatus = bot_states.RUNNING
+                    self.trade_bot.switchState(bot_states.RUNNING) #make neceseary "resets"
+                    self.market.switchState(bot_states.RUNNING) # -- || –- 
+            else:
+                    self.botStatus = bot_states.STOPPED
+                    self.trade_bot.switchState(bot_states.STOPPED)
+                    self.market.switchState(bot_states.STOPPED)
 
     
     

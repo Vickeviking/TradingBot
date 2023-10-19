@@ -54,6 +54,7 @@ class bot_dialoge_model:
         self.dialoge = []
         self.nmbrOfMessages_lastUpdate = 0
 
+
     def setSettings(self, settings):
         self.settings = settings
     def setSettings(self, showStock = True, showQuantity = True, showPrice = True, showTotPrice = True):

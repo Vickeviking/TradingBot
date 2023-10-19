@@ -1,9 +1,7 @@
 # bot_settings_model.py
 from resources.stock_enums import *
+from resources.app_enums import *
 
-class bot_states_enum(Enum):
-    RUNNING = 1
-    STOPPED = 2
 
 class bot_settings_model:
     def __init__(self, controller=None):
@@ -24,6 +22,8 @@ class bot_settings_model:
         self.start_balance = 100
         # bot state
         self.bot_state = bot_states_enum.STOPPED
+
+
 
 
 
