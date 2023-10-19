@@ -45,8 +45,8 @@ class tradeBot:
 
         else:   #switched on
 
-            self.marketSignalLogic.settings = self.implementedSettings
-            self.wallet.settings = self.implementedSettings
+            self.marketSignalLogic.updateSettings(self.implementedSettings)
+            self.wallet.updateSettings(self.implementedSettings)
             self.state = bot_states.RUNNING
             self.marketSignalLogic.switchState(bot_states.RUNNING)
 
@@ -69,3 +69,9 @@ class tradeBot:
         #Todo sell stock, update necessary values
         #TODO turn off flag in marketSignalLogic
         pass
+
+    # getter and setters
+
+    def setMarket(self, market):
+        self.market = market
+        self.marketSignalLogic.setMarket(market)

@@ -15,6 +15,9 @@ class bot_settings_controller:
         #create model
         self.model = bot_settings_model(self)
         self.dialoge_controller = None
+        # needs market model , aswell as live_stocks_model
+        self.market_model = None
+        self.live_stocks_model = None
         self.trade_bot = None # the tradebot model
 
 
@@ -27,8 +30,20 @@ class bot_settings_controller:
             self.model.stocks.append(stock)
     def remove_stock(self, stock):
         self.model.stocks.remove(stock)
+    
+    def set_dialoge_controller(self, dialoge_controller):
+        self.dialoge_controller = dialoge_controller
+    def set_market_model(self, market_model):
+        self.market_model = market_model
+    def set_live_stocks_model(self, live_stocks_model):
+        self.live_stocks_model = live_stocks_model
+    def set_trade_bot(self, trade_bot):
+        self.trade_bot = trade_bot
+        if self.trade_bot.market != None:
+            self.market_model = self.trade_bot.market
 
     # setttings
+
     # buy signals
     def set_buy_lower_rsi(self, rsi_lower):
         if rsi_lower != "" and int(rsi_lower) < int(self.model.buy_rsi_range[1]):
@@ -69,6 +84,10 @@ class bot_settings_controller:
             self.update()
 
     def startBtnClicked(self):
+        if len(self.model.stocks) < 4:
+            self.message = "Please select 4 stocks first"
+            self.dialoge_controller.addMessage(customMessage=self.message)
+            return
         msgColor = None
         if self.model.bot_state == bot_states_enum.STOPPED.value:
             self.set_bot_state(bot_states_enum.RUNNING)
@@ -80,9 +99,13 @@ class bot_settings_controller:
         self.message = "Bot state changed to: " + self.model.bot_state.name
         self.dialoge_controller.addMessage(customMessage=self.message, customMessage_color=msgColor)
         # set new settings to bot 
-        #stocks = [], buy_rsi_range = [0,100], buy_percentage_dip = 0, buy_derivative_on_switch = False, buy_derivative_steps = 0, buy_quantity_at_atime = 0, sell_profit_exit = 0, sell_loss_exit = 0, sell_derivative_on_switch = False, sell_derivative_steps = 0, start_balance = 100
         self.updatedSettings = ts(self.model.stocks, self.model.buy_rsi_range, self.model.buy_percentage_dip, self.model.buy_derivative_on_switch, self.model.buy_derivative_steps, self.model.buy_quantity_at_atime, self.model.sell_profit_exit, self.model.sell_loss_exit, self.model.sell_derivative_on_switch, self.model.sell_derivative_steps, self.model.start_balance)
         self.trade_bot.implementedSettings = self.updatedSettings
+        # update stocks in live_stock_model, dynamic stocks
+        self.live_stocks_model.setStocks(self.model.stocks) #should contain tickets ?
+        # update stocks in market 
+        self.market_model.updateStocktypes(self.model.stocks) #should contain tickets ? 
+
         self.update()
 
     def save_settings_clicked(self):

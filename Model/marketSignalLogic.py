@@ -66,7 +66,12 @@ class buySignalLogic:
             return True
         else:
             return False
-
+    # getter and setters
+    def setMarket(self, market):
+        self.market = market
+        self.rsiSignalLogic.market = market
+        self.percentageDipSignalLogic.market = market
+        self.derivativeSignalLogic.market = market
 
 
 # -------- Sell Signal Logic -------- #
@@ -126,6 +131,12 @@ class sellSignalLogic:
             return True
         else:
             return False
+    # getter and setters
+    def setMarket(self, market):
+        self.market = market
+        self.profitPercentageSignalLogic.market = market
+        self.exitPercentageSignalLogic.market = market
+        self.derivativeSignalLogic.market = market
 
 
 # -------- Market Signal Logic -------- #
@@ -138,6 +149,7 @@ class marketSignalLogic:
         self.isSignaling = False
         self.state = bot_states.STOPPED
         self.settings = settings
+        self.market = market
     def checkForBuySignal(self):
         if self.buySignalLogic.isSignaling:
             self.signal = self.buySignalLogic.signal
@@ -166,6 +178,11 @@ class marketSignalLogic:
             self.buySignalLogic.isSignaling = False
             self.sellSignalLogic.isSignaling = False
             self.resetSignal()
+    def updateSettings (self, settings):
+        self.settings = settings
+        self.buySignalLogic.settings = settings
+        self.sellSignalLogic.settings = settings
+        self.market.settings = settings
 
 
     def update(self):
@@ -175,3 +192,10 @@ class marketSignalLogic:
         self.sellSignalLogic.update()
         self.checkForBuySignal()
         self.checkForSellSignal()
+
+    # getter and setters
+
+    def setMarket(self, market):
+        self.market = market
+        self.buySignalLogic.setMarket(market)
+        self.sellSignalLogic.setMarket(market)

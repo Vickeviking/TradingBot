@@ -6,6 +6,7 @@ from tkinter import *
 from tkmacosx import Button as macButton
 from resources.colorpalete import colorPalette as cp
 from resources.stock_enums import *
+from resources.app_enums import *
 
 class bot_settings_view_header(LabelFrame):
     def __init__(self, master=None,controller=None, text=None, bg=cp.clayred):
@@ -69,19 +70,19 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.nasdaq_tesla = Label(self.nasdaqstockFrame1, text="tesla", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_tesla_settings_radio = IntVar()
         self.nasdaq_tesla_settings_radio.set(0)
-        self.nasdaq_tesla_radio = Radiobutton(self.nasdaqstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_tesla_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Tesla))
+        self.nasdaq_tesla_radio = Radiobutton(self.nasdaqstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_tesla_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_tickets.Tesla))
         self.nasdaq_apple = Label(self.nasdaqstockFrame2, text="apple", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_apple_settings_radio = IntVar()
         self.nasdaq_apple_settings_radio.set(0)
-        self.nasdaq_apple_radio = Radiobutton(self.nasdaqstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_apple_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Apple))
+        self.nasdaq_apple_radio = Radiobutton(self.nasdaqstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_apple_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_tickets.Apple))
         self.nasdaq_nvidia = Label(self.nasdaqstockFrame3, text="nvidia", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_nvidia_settings_radio = IntVar()
         self.nasdaq_nvidia_settings_radio.set(0)
-        self.nasdaq_nvidia_radio = Radiobutton(self.nasdaqstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_nvidia_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Nvidia))
+        self.nasdaq_nvidia_radio = Radiobutton(self.nasdaqstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_nvidia_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_tickets.Nvidia))
         self.nasdaq_amazon = Label(self.nasdaqstockFrame4, text="amazon", bg=cp.clayred, fg="white", font=self.roboto14)
         self.nasdaq_amazon_settings_radio = IntVar()
         self.nasdaq_amazon_settings_radio.set(0)
-        self.nasdaq_amazon_radio = Radiobutton(self.nasdaqstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_amazon_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Amazon))
+        self.nasdaq_amazon_radio = Radiobutton(self.nasdaqstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.nasdaq_amazon_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_tickets.Amazon))
         #pack nasdaq stock pile
         self.nasdaqstockFrame1.pack(anchor="e")
         self.nasdaqstockFrame2.pack(anchor="e")
@@ -108,19 +109,19 @@ class bot_settings_view_settings_panel_left(LabelFrame):
         self.sthlm_astrazeneca = Label(self.sthlmstockFrame1, text="AstraZeneca", bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_astrazeneca_settings_radio = IntVar()
         self.sthlm_astrazeneca_settings_radio.set(0)
-        self.sthlm_astrazeneca_radio = Radiobutton(self.sthlmstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_astrazeneca_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Astrazeneca))
+        self.sthlm_astrazeneca_radio = Radiobutton(self.sthlmstockFrame1, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_astrazeneca_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_tickets.Astrazeneca))
         self.sthlm_investorab = Label(self.sthlmstockFrame2, text="InvestorAB", bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_investorb_settings_radio = IntVar()
         self.sthlm_investorb_settings_radio.set(0)
-        self.sthlm_investorab_radio = Radiobutton(self.sthlmstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_investorb_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.Investorb))
+        self.sthlm_investorab_radio = Radiobutton(self.sthlmstockFrame2, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_investorb_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_tickets.Investorb))
         self.sthlm_abb = Label(self.sthlmstockFrame3, text="abb", bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_abb_settings_radio = IntVar()
         self.sthlm_abb_settings_radio.set(0)
-        self.sthlm_abb_radio = Radiobutton(self.sthlmstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_abb_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.ABB))
+        self.sthlm_abb_radio = Radiobutton(self.sthlmstockFrame3, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_abb_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_tickets.ABB))
         self.sthlm_atlascopco = Label(self.sthlmstockFrame4, text="atlas copco", bg=cp.clayred, fg="white", font=self.roboto14)
         self.sthlm_atlascopco_settings_radio = IntVar()
         self.sthlm_atlascopco_settings_radio.set(0)
-        self.sthlm_atlascopco_radio = Radiobutton(self.sthlmstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_atlascopco_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_types_enum.AtlasCopco))
+        self.sthlm_atlascopco_radio = Radiobutton(self.sthlmstockFrame4, bg=cp.clayred, fg="white", font=self.roboto14, variable=self.sthlm_atlascopco_settings_radio, value=1, command=lambda: self.controller.stockbtn_clicked(stock_tickets.AtlasCopco))
         #pack sthlm stock pile
         self.sthlmstockFrame1.pack(anchor="e")
         self.sthlmstockFrame2.pack(anchor="e")
@@ -391,11 +392,11 @@ class bot_settings_view_finalize(LabelFrame):
         self.padding3.pack(side="left")
         self.start_bot_button.pack(side="left")
     def start_bot_clicked(self):
-        if self.start_bot_button.cget("text") == "Start bot":
-            self.start_bot_button.configure(text="Stop bot")
-        else :
-            self.start_bot_button.configure(text="Start bot")
         self.controller.startBtnClicked()
+        if self.controller.model.bot_state == bot_states_enum.RUNNING.value:
+            self.start_bot_button.configure(text="Start bot")
+        elif self.controller.model.bot_state == bot_states_enum.STOPPED.value:
+            self.start_bot_button.configure(text="Stop bot")
 
 
 class bot_settings_veiw(LabelFrame):
@@ -426,35 +427,35 @@ class bot_settings_veiw(LabelFrame):
     #setters
 
     def updateRadioBtn(self,stocks):
-        if stock_types_enum.Tesla in stocks:
+        if stock_tickets.Tesla in stocks:
             self.settings_panel.left.nasdaq_tesla_settings_radio.set(1)
         else:
             self.settings_panel.left.nasdaq_tesla_settings_radio.set(0)
-        if stock_types_enum.Apple in stocks:
+        if stock_tickets.Apple in stocks:
             self.settings_panel.left.nasdaq_apple_settings_radio.set(1)
         else:
             self.settings_panel.left.nasdaq_apple_settings_radio.set(0)
-        if stock_types_enum.Nvidia in stocks:
+        if stock_tickets.Nvidia in stocks:
             self.settings_panel.left.nasdaq_nvidia_settings_radio.set(1)
         else:
             self.settings_panel.left.nasdaq_nvidia_settings_radio.set(0)
-        if stock_types_enum.Amazon in stocks:
+        if stock_tickets.Amazon in stocks:
             self.settings_panel.left.nasdaq_amazon_settings_radio.set(1)
         else:
             self.settings_panel.left.nasdaq_amazon_settings_radio.set(0)
-        if stock_types_enum.Astrazeneca in stocks:
+        if stock_tickets.Astrazeneca in stocks:
             self.settings_panel.left.sthlm_astrazeneca_settings_radio.set(1)
         else:
             self.settings_panel.left.sthlm_astrazeneca_settings_radio.set(0)
-        if stock_types_enum.Investorb in stocks:
+        if stock_tickets.Investorb in stocks:
             self.settings_panel.left.sthlm_investorb_settings_radio.set(1)
         else:
             self.settings_panel.left.sthlm_investorb_settings_radio.set(0)
-        if stock_types_enum.ABB in stocks:
+        if stock_tickets.ABB in stocks:
             self.settings_panel.left.sthlm_abb_settings_radio.set(1)
         else:
             self.settings_panel.left.sthlm_abb_settings_radio.set(0)
-        if stock_types_enum.AtlasCopco in stocks:
+        if stock_tickets.AtlasCopco in stocks:
             self.settings_panel.left.sthlm_atlascopco_settings_radio.set(1)
         else:
             self.settings_panel.left.sthlm_atlascopco_settings_radio.set(0)

@@ -49,17 +49,14 @@ class MyApp:
         #init system models 
         self.market = marketClass()  
         self.trade_bot = tradeBotClass()
-
-
-        # last touches (direct inits in creation canceled, because of circular dependencies?, bad error msg so hard to tell, but this way works)
-        # give controllers acces to dialoge controller, to display msg
-        self.trade_bot.market = self.market
-        self.controllers[ControllerTypes.BOT_SETTINGS].dialoge_controller = self.controllers[ControllerTypes.BOT_DIALOGUE]
-        self.controllers[ControllerTypes.BOT_SETTINGS].trade_bot = self.trade_bot
        
-        
-
-
+        # give settingControll needs to update alot, needs ptr
+        self.trade_bot.setMarket(self.market)
+        self.controllers[ControllerTypes.BOT_SETTINGS].set_dialoge_controller(self.controllers[ControllerTypes.BOT_DIALOGUE])
+        self.controllers[ControllerTypes.BOT_SETTINGS].set_market_model(self.market)
+        self.controllers[ControllerTypes.BOT_SETTINGS].set_live_stocks_model(self.controllers[ControllerTypes.LIVE_STOCKS].model)
+        self.controllers[ControllerTypes.BOT_SETTINGS].set_trade_bot(self.trade_bot)
+       
         # Start the update clock
         self.update_clock()
 

@@ -13,6 +13,6 @@ class live_stocks_controller:
 
     def get_label_frame(self):
         return self.view
-    
+
     def update(self):
         self.view.update()
