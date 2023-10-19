@@ -73,6 +73,8 @@ class bot_settings_controller:
         self.model.start_balance = start_balance
     # bot state
     def set_bot_state(self, bot_state):
+        if len(self.model.stocks) < 4 :
+            return 
         self.model.bot_state = bot_state
 
     def stockbtn_clicked(self, stock):
