@@ -19,6 +19,9 @@ class MyApp:
         self.app.grid_rowconfigure(0, weight=1)
         self.app.grid_rowconfigure(1, weight=1)
 
+        #globals 
+        self.botStatus = 2 # 1 = running, 2 = stopped
+
         # Initializing controllers
         self.controllers = {
             ControllerTypes.BOT_DIALOGUE: bot_dialoge_controller(self.app),
@@ -67,11 +70,33 @@ class MyApp:
         self.controllers[ControllerTypes.BOT_SETTINGS].update()
         self.controllers[ControllerTypes.LIVE_STOCKS].update()
         # update system models (are "floating around and used by controllers, so stored in top layer")
-       #TODO self.trade_bot.update()
-       #TODO self.market.update()
+        self.market.update()
+        self.trade_bot.update()
+        self.checkBotChange()
 
         self.app.after(300, self.update_clock)
+    
+    def checkBotChange(self):
+        bot_state = self.controllers[ControllerTypes.BOT_SETTINGS].model.bot_state.value
+        if bot_state != self.botStatus: # bot state changed
+            self.botStatus = bot_state
+            #TODO act upon bot state change, view already implememnted but do these: 
+                #TODO if started 
+                    #TODO tradebot reset -> add settings to tradebot
+                    #TODO market signal logic reset
+                    #TODO wallet reset
+                    #TODO market reset -> should now show the picked stocks 
+                #TODO if stopped
+                    #TODO tradebot reset
+                    #TODO market signal logic reset
+                    #TODO wallet reset
+                    #TODO market reset -> should now show nothing ? 
+                    #TODO show off values , turn off models ? each model having off/on state 
+
+    
+    
         
+
     def run(self):
         # Start the main loop
         self.app.mainloop()
