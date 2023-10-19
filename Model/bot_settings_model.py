@@ -21,7 +21,7 @@ class bot_settings_model:
         # start balance
         self.start_balance = 100
         # bot state
-        self.bot_state = bot_states_enum.STOPPED
+        self.bot_state = bot_states_enum.STOPPED.value
 
 
 

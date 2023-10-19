@@ -73,41 +73,46 @@ class bot_settings_controller:
         self.model.start_balance = start_balance
     # bot state
     def set_bot_state(self, bot_state):
-        if len(self.model.stocks) < 4 :
-            return 
         self.model.bot_state = bot_state
 
     def stockbtn_clicked(self, stock):
-        if stock in self.model.stocks:
-            self.remove_stock(stock)
-            self.update()
+        if self.model.bot_state == bot_states_enum.RUNNING.value:
+            self.message = "Stop bot to change stocks"
+            self.dialoge_controller.addMessage(customMessage=self.message)
         else:
-            self.set_new_stock(stock)
+            if stock in self.model.stocks:
+                self.remove_stock(stock)
+            else:
+                self.set_new_stock(stock)
             self.update()
 
     def startBtnClicked(self):
         if len(self.model.stocks) < 4:
             self.message = "Please select 4 stocks first"
             self.dialoge_controller.addMessage(customMessage=self.message)
-            return
-        msgColor = None
-        if self.model.bot_state == bot_states_enum.STOPPED.value:
-            self.set_bot_state(bot_states_enum.RUNNING)
-            msgColor = colorPalette.neongreen
         else:
-            self.set_bot_state(bot_states_enum.STOPPED)
-            msgColor = colorPalette.neonred
-        # dialoge message 
-        self.message = "Bot state changed to: " + self.model.bot_state.name
-        self.dialoge_controller.addMessage(customMessage=self.message, customMessage_color=msgColor)
-        # set new settings to bot 
-        self.updatedSettings = ts(self.model.stocks, self.model.buy_rsi_range, self.model.buy_percentage_dip, self.model.buy_derivative_on_switch, self.model.buy_derivative_steps, self.model.buy_quantity_at_atime, self.model.sell_profit_exit, self.model.sell_loss_exit, self.model.sell_derivative_on_switch, self.model.sell_derivative_steps, self.model.start_balance)
-        self.trade_bot.implementedSettings = self.updatedSettings
-        # update stocks in live_stock_model, dynamic stocks
-        self.live_stocks_model.setStocks(self.model.stocks) #should contain tickets ?
-        # update stocks in market 
-        self.market_model.updateStocktypes(self.model.stocks) #should contain tickets ? 
-
+            msgColor = None
+            if self.model.bot_state == bot_states_enum.STOPPED.value:
+                self.set_bot_state(bot_states_enum.RUNNING.value)
+                msgColor = colorPalette.neongreen
+            else:
+                self.set_bot_state(bot_states_enum.STOPPED.value)
+                msgColor = colorPalette.neonred
+            # dialoge message 
+            name = ""
+            if self.model.bot_state == bot_states_enum.RUNNING.value:
+                name = "Running"
+            else:
+                name = "Stopped"
+            self.message = "Bot state changed to: " + name
+            self.dialoge_controller.addMessage(customMessage=self.message, customMessage_color=msgColor)
+            # set new settings to bot 
+            self.updatedSettings = ts(self.model.stocks, self.model.buy_rsi_range, self.model.buy_percentage_dip, self.model.buy_derivative_on_switch, self.model.buy_derivative_steps, self.model.buy_quantity_at_atime, self.model.sell_profit_exit, self.model.sell_loss_exit, self.model.sell_derivative_on_switch, self.model.sell_derivative_steps, self.model.start_balance)
+            self.trade_bot.implementedSettings = self.updatedSettings
+            # update stocks in live_stock_model, dynamic stocks
+            self.live_stocks_model.setStocks(self.model.stocks) #should contain tickets ?
+            # update stocks in market 
+            self.market_model.updateStocktypes(self.model.stocks) #should contain tickets ? 
         self.update()
 
     def save_settings_clicked(self):

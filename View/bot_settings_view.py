@@ -393,10 +393,6 @@ class bot_settings_view_finalize(LabelFrame):
         self.start_bot_button.pack(side="left")
     def start_bot_clicked(self):
         self.controller.startBtnClicked()
-        if self.controller.model.bot_state == bot_states_enum.RUNNING.value:
-            self.start_bot_button.configure(text="Start bot")
-        elif self.controller.model.bot_state == bot_states_enum.STOPPED.value:
-            self.start_bot_button.configure(text="Stop bot")
 
 
 class bot_settings_veiw(LabelFrame):
@@ -490,10 +486,10 @@ class bot_settings_veiw(LabelFrame):
         else :
             self.controller.set_sell_derivative_on_switch(False)
 
-        if self.finalize.start_bot_button.cget("text") == "Start bot":
-            self.controller.set_bot_state(2)
-        else :
-            self.controller.set_bot_state(1)
+        if self.controller.model.bot_state == bot_states_enum.RUNNING.value: # if bot is running set text to stop bot
+            self.finalize.start_bot_button.configure(text="Stop bot")
+        else:
+            self.finalize.start_bot_button.configure(text="Start bot")
 
         
     
