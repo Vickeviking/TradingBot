@@ -12,6 +12,8 @@ class market:
         self.live_stocks_model = None # each update of the market will update info in that model
         self.settings = None
         self.stocks = [stock(), stock(), stock(), stock()]
+        self.fetchDataModule = fetchData()
+        self.stockViewModel = None
     def update(self):
         if self.bot_state == bot_states.STOPPED.value: #TODO could cause error, double check compatinbility
             return
@@ -31,5 +33,18 @@ class market:
             pass
 
     def updateStocks(self):
-        #TODO update stocks inside the model
-        pass
+        self.stockViewModel.showStocks = self.showStocks
+        self.stockViewModel.updateStockPointer(self.stocks)
+    
+        if not self.showStocks: # if we aint showing stocks, dont update
+            return
+        if len(self.stocks) == 0:   #if no stocks are selected
+            return
+        
+        if self.stockViewModel is not None:
+            for stock in self.stocks:
+                newStockPrice = self.fetchDataModule.getStockInfoArray(stock.stockTicket)
+                stock.update(newStockPrice)
+        
+     
+

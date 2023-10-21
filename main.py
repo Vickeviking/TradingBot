@@ -19,6 +19,7 @@ class MyApp:
         self.app.grid_columnconfigure(2, weight=441100)
         self.app.grid_rowconfigure(0, weight=1)
         self.app.grid_rowconfigure(1, weight=1)
+        self.timeDelay = 3000 #ms
 
         #globals 
         self.botStatus = bot_states.STOPPED # 1 = running, 2 = stopped
@@ -52,6 +53,7 @@ class MyApp:
        
         # give settingControll needs to update alot, needs ptr
         self.trade_bot.setMarket(self.market)
+        self.market.stockViewModel = self.controllers[ControllerTypes.LIVE_STOCKS].model
         self.controllers[ControllerTypes.BOT_SETTINGS].set_dialoge_controller(self.controllers[ControllerTypes.BOT_DIALOGUE])
         self.controllers[ControllerTypes.BOT_SETTINGS].set_market_model(self.market)
         self.controllers[ControllerTypes.BOT_SETTINGS].set_live_stocks_model(self.controllers[ControllerTypes.LIVE_STOCKS].model)
@@ -59,6 +61,7 @@ class MyApp:
        
         # Start the update clock
         self.update_clock()
+        self.updateStockViewModel()
 
     def update_clock(self):
         # update controllers, frames are updated by controllers
@@ -72,6 +75,12 @@ class MyApp:
         self.checkBotChange()
 
         self.app.after(300, self.update_clock)
+
+    def updateStockViewModel(self):
+        if len(self.controllers[ControllerTypes.LIVE_STOCKS].model.stocks) != 0:
+            for i in range(4):
+                self.controllers[ControllerTypes.LIVE_STOCKS].model.stocks[i].update10StockValues()
+        self.app.after(self.timeDelay, self.updateStockViewModel)
     
     def checkBotChange(self):
         bot_state = self.controllers[ControllerTypes.BOT_SETTINGS].model.bot_state

@@ -14,20 +14,23 @@ class live_stock_view_header(LabelFrame):
         self.roboto22 = tkFont.Font(family="Roboto", size=22, weight="normal")
         
         # Create a Frame to center the labels
-        center_frame = tk.Frame(self, bg=cp.smoothblack, height=4)
-        center_frame.pack(expand=True, fill=tk.BOTH)
+        self.center_frame = tk.Frame(self, bg=cp.smoothblack, height=4)
+        self.center_frame.pack(expand=True, fill=tk.BOTH)
         #create padding for the frame
-        center_frame.grid_rowconfigure(0, weight=1)
-        center_frame.grid_columnconfigure(0, weight=1)
-        center_frame.grid_columnconfigure(1, weight=6)
-        center_frame.grid_columnconfigure(2, weight=2)
-        center_frame.grid_columnconfigure(3, weight=1)
+        self.center_frame.grid_rowconfigure(0, weight=1)
+        self.center_frame.grid_columnconfigure(0, weight=1)
+        self.center_frame.grid_columnconfigure(1, weight=6)
+        self.center_frame.grid_columnconfigure(2, weight=2)
+        self.center_frame.grid_columnconfigure(3, weight=1)
         # Create a label for the stock name (Ticket)
-        stock_name_label = tk.Label(center_frame, text="Apple(AAPL) ", font=self.roboto22, fg="white", bg=cp.smoothblack, height=3)
-        stock_name_label.grid(row=0, column=1, sticky="e")
+        self.stock_name_label = tk.Label(self.center_frame, text="Apple(AAPL) ", font=self.roboto22, fg="white", bg=cp.smoothblack, height=3)
+        self.stock_name_label.grid(row=0, column=1, sticky="e")
+        # Create a label for the value
+        self.value_label = tk.Label(self.center_frame, text="$204.00", font=self.roboto22, fg="white", bg=cp.smoothblack, height=3)
+        self.value_label.grid(row=0, column=3, sticky="w")
         # Create a label for the percentage
-        percentage_label = tk.Label(center_frame, text="+0.2%", font=self.roboto22, fg="green", bg=cp.smoothblack, height=3)
-        percentage_label.grid(row=0, column=2, sticky="w")
+        self.percentage_label = tk.Label(self.center_frame, text="+0.2%", font=self.roboto22, fg="green", bg=cp.smoothblack, height=3)
+        self.percentage_label.grid(row=0, column=2, sticky="w")
 
 class LiveStockView(LabelFrame):
     def __init__(self, master=None, controller=None, text=None, bg="blue"):
@@ -62,7 +65,23 @@ class LiveStockView(LabelFrame):
         # Place the frame to control its maximum height
         self.header.pack(expand=True, fill=tk.BOTH, side=tk.TOP)
         self.graph.pack(expand=True, fill=tk.BOTH, side=tk.TOP)
-        
+    def updateLive(self, dataArray, stockName, stockPercentage, stockPrice):
+        self.ax_graph.clear()
+        xPlots = []
+        for i in range(len(dataArray)):
+            xPlots.append(i)
+        self.header.stock_name_label.configure(text=stockName)
+        self.header.percentage_label.configure(text=stockPercentage)
+        self.header.value_label.configure(text=str(round(stockPrice,2)))
+        self.ax_graph.clear()
+        self.ax_graph.plot(xPlots, dataArray)
+        self.canvas_graph.draw()
+    def clearPlot(self):
+        self.ax_graph.clear()
+        self.header.stock_name_label.configure(text="Choose a Stock")
+        self.header.percentage_label.configure(text="")
+        self.header.value_label.configure(text="")
+        self.canvas_graph.draw()
 
 class live_stocks_veiw(LabelFrame):
     def __init__(self, master=None, controller=None, text=None, bg="green"):
@@ -78,3 +97,19 @@ class live_stocks_veiw(LabelFrame):
             live_stock = LiveStockView(self, self.controller)
             live_stock.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
             self.live_stocks.append(live_stock)
+
+    def update(self):
+        # If not showing stocks, clear the plot for all LiveStockView instances
+            if not self.controller.model.showStocks:
+                for live_stock in self.live_stocks:
+                    live_stock.clearPlot()
+                return
+            elif self.controller.model.showStocks:
+                itteratorStock = 0
+                for live_stock in self.live_stocks:
+                    if itteratorStock < len(self.controller.model.stocks):
+                        if self.controller.model.showStocks:
+                            live_stock.updateLive(self.controller.model.stocks[itteratorStock].last10StockValues,self.controller.model.stocks[itteratorStock].stockName ,self.controller.model.stocks[itteratorStock].stockValueChangePercentage, self.controller.model.stocks[itteratorStock].stockValue)
+                    itteratorStock += 1
+
+        
