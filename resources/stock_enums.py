@@ -17,7 +17,7 @@ class stock_tickets(Enum):
     Apple = "AAPL",
     Nvidia = "NVDA",
     Amazon = "AMZN",
-    Astrazeneca = "AZN",
+    Astrazeneca = "AZN.ST",
     Investorb = "INVE-B.ST",
     ABB = "ABB.ST",
     AtlasCopco = "ATCO-A.ST"

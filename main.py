@@ -89,10 +89,12 @@ class MyApp:
                     self.botStatus = bot_states.RUNNING
                     self.trade_bot.switchState(bot_states.RUNNING) #make neceseary "resets"
                     self.market.switchState(bot_states.RUNNING) # -- || –- 
+                    self.controllers[ControllerTypes.LIVE_STOCKS].view.switchState(bot_states.RUNNING)
             else:
                     self.botStatus = bot_states.STOPPED
                     self.trade_bot.switchState(bot_states.STOPPED)
                     self.market.switchState(bot_states.STOPPED)
+                    self.controllers[ControllerTypes.LIVE_STOCKS].view.switchState(bot_states.STOPPED)
 
     
     

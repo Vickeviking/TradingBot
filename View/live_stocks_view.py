@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mp
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from resources.colorpalete import colorPalette as cp
+from resources.app_enums import bot_states_enum as bot_states
 class live_stock_view_header(LabelFrame):
     def __init__(self, master=None, controller=None, text=None, bg=cp.smoothblack):
         super().__init__(master, text=text, bg=bg)
@@ -88,6 +89,7 @@ class live_stocks_veiw(LabelFrame):
         super().__init__(master, text=text, bg=bg)
         self.master = master
         self.controller = controller
+        self.bot_state = None
         self.configure(border=0, borderwidth=0)
         self.pack_propagate(0)
         
@@ -100,7 +102,7 @@ class live_stocks_veiw(LabelFrame):
 
     def update(self):
         # If not showing stocks, clear the plot for all LiveStockView instances
-            if not self.controller.model.showStocks:
+            if self.bot_state == bot_states.STOPPED or not self.controller.model.showStocks:
                 for live_stock in self.live_stocks:
                     live_stock.clearPlot()
                 return
@@ -113,3 +115,10 @@ class live_stocks_veiw(LabelFrame):
                     itteratorStock += 1
 
         
+    def switchState(self, botStateParam):
+        if botStateParam == bot_states.STOPPED:
+            self.bot_state = bot_states.STOPPED
+            self.showStocks = False
+        else:
+            self.bot_state = bot_states.RUNNING
+            self.showStocks = True

@@ -13,6 +13,8 @@ class live_stocks_model:
     def updateStockPointer(self, stock):
         for i in range(len(self.stocks)):
                 self.stocks[i] = stock[i]
+
+            
         
     
 
